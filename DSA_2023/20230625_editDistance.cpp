@@ -18,6 +18,7 @@ class editDistance{
     }
 
     bool editDistance(int pos1, int pos2,int cost){
+        if( pos1 == -1 || pos2 == -1) 
 
     }
 

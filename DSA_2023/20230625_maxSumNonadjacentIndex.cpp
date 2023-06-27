@@ -12,8 +12,7 @@ class ElementSum{
     }
     int findMaxSum(int index){
         if(index<0) return 0;
-        else if(index==0) return elements[index];
-        else if(index>elements.size()) return findMaxSum(elements.size()-1);
+        else if(index==0 || index==1) return elements[index]; //Base Case
         else if(memo.find(index) != memo.end()) return memo[index];
         else{
             auto res = max(findMaxSum(index-1),findMaxSum(index-2) + elements[index]);
@@ -21,6 +20,9 @@ class ElementSum{
             memo[index] = res;
             return res;
         } 
+    }
+    int findMaxSum(){
+        return findMaxSum(elements.size()-1);
     }
 };
 
@@ -31,21 +33,23 @@ class ElementSumIterative{
     ElementSumIterative(vector<int> inp){
         this->elem = inp;
     }
-    int findMaxSum(int index){
-        int memo[2];
+    int findMaxSum(){
+        int memo[2] = {elem[0],elem[1]};
 
-        //Not able to think the base case for 0 & 1.
-        // Because the recursion for n-1 & n-2.
-        // The space can be optimized to 2 integers.
-
-        return 0;
+        for(int iter=2;iter<elem.size();iter++){
+            memo[iter&1] = max(memo[(iter-1)&1], memo[(iter-2)&1]+elem[iter]);
+            cout << iter << ":" << memo[iter&1] << endl;
+        }
+        return memo[(elem.size()-1)&1];
     }
-}
+};
 
 
 
 int main(){
     ElementSum es({5, 5, 10, 100, 10, 105});
+    ElementSumIterative esi({5, 5, 10, 100, 10, 105});
 
-    cout << "Solution: " << es.findMaxSum(600) << endl;
+    cout << "Solution: " << es.findMaxSum() << endl;
+    cout << "Iterative Solution: " << esi.findMaxSum() << endl;
 }
