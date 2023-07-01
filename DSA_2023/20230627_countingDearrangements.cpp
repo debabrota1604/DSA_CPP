@@ -3,6 +3,8 @@ using namespace std;
 
 // dearrangements is such permutations where none of the elements in its actual position
 
+// recurrence relation: f(n) = (n-1) * (f(n-1) + f(n-2))
+
 class countDerrangements{
     vector<int> array;
     unordered_map<int,int> memo;
