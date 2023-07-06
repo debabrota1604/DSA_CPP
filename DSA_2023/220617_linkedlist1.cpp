@@ -1,110 +1,153 @@
 #include<iostream>
 using namespace std;
 
-class Node{
-public:
+struct Node{
     int data;
-    Node* next;
-
+    Node *ptr;
     Node(){
-        this->data = 0;
-        this->next = nullptr;
+        data = 0;
+        ptr = nullptr;
     }
-
-    Node(int data){
-        this->data = data;
-        this->next = nullptr;
+    Node(int num){
+        this->data = num;
+        ptr = nullptr;
     }
 };
 
-class LinkedList{
-    Node *head;
-    
-    public:
-    // This works in two steps, without "new" operator
-    // LinkedList(){
-    //     Node temp;
-    //     this->head = &temp;
-    // }
-    LinkedList(){
-        this->head = nullptr;
-    }
-    LinkedList(int data){
-        Node temp(data);
-        this->head = &temp;
-    }
 
-    void disp(){
-        Node *temp = head;
-        while(temp != nullptr){
-            cout << temp->data << " ";
-            temp = temp->next;
+void disp(Node *head){
+    Node *temp = head;
+    while(temp!=nullptr){
+        cout << temp->data << " ";
+        temp = temp->ptr;
+    }
+    cout << endl;
+}
+
+void insertNode(Node **phead, int data, int pos){
+    /*
+    Two special cases:
+    pos = 0 : insert at begin : Handled differently
+    pos = -1 : insert at end : compute length and perform insert-at-any-position case
+    */
+    if(pos == 0){
+        Node *temp = new Node(data);
+        temp->ptr = *phead;
+        //phead = &temp;
+        *phead = temp;       
+    }
+    else if(pos == -1){
+        Node *temp = *phead;
+        pos = 1; // considering count from second node
+        while(temp->ptr !=nullptr){ temp = temp->ptr; pos++; }
+
+        return insertNode(phead, data, pos);
+    }
+    else{
+        Node *iter = *phead, *temp = new Node(data);
+        while(iter->ptr != nullptr && pos !=1){ 
+            iter = iter->ptr; 
+            pos--; 
         }
-        cout << endl;
-    }
-
-    int size(){
-        int len=0;
-        Node *temp=head;
-        while(temp != nullptr){
-            temp = temp->next;
-            len++;
-        }
-        return len;
-    }
-
-
-    void insert_at_pos(int data, int pos){
-        if(pos > this->size()){
-            cout << "Error: Size is lesser [" << this->size() << "] than given position " << pos << endl;
+        if(pos >1){
+            cout << "Error: The position is outside the list length" << endl;
             return;
         }
-        if(pos==0){
-            Node *temp = new Node(data);
-            temp->next = head;
-            head = temp;
+        if(iter->ptr != nullptr){ 
+            temp->ptr = iter->ptr;
+            // Else temp->ptr = nullptr, which is already there!
         }
-        else if(pos == -1){ //insert at end
-            insert_at_pos(data, this->size());
-        }
-        else{ //insert at middle or end
-            int count = 0;
-            Node *iter = head;
-            Node *temp = new Node(data);
-            while(iter->next != nullptr && count !=pos-1){
-                iter = iter->next;
-                count++;
-            }
-            temp->next = iter->next;
-            iter->next = temp;
-        }
+        iter->ptr = temp;
+    }   
+}
+
+void deleteNode(Node **head, int index){
+    if(*head == nullptr){
+        cout << "Error: List is already empty!" << endl;
+        return;
     }
-};
+    else if(index == 0){
+        Node *temp = *head;
+        *head = (*head)->ptr;
+        delete(temp);
+    }
+    else if(index == -1){
+        index=0;
+        Node *temp = *head;
+        while( temp->ptr != nullptr){
+            temp = temp->ptr;
+            index++;
+        }
+        return deleteNode(head, index);
+    }
+    else{
+        int count = 1; //Stop at the previous node
+        Node *temp = *head;
+        while(count !=index){
+            temp = temp->ptr;
+            count++;
+            if(temp == nullptr){
+                cout << "Error: Delete index larger than the list length." << endl;
+                return;
+            }
+        }        
+        Node *delNode = temp->ptr;
+        temp->ptr = delNode->ptr;
+        delete(delNode);
+    }
+}
+
+void searchAndDelete(Node **head, int key){
+    Node *temp = *head;
+    int counter = 0;
+    while(temp != nullptr && temp->data !=key){
+        temp = temp->ptr;
+        counter++;
+    }
+    if(temp == nullptr){
+        cout << "Error: Key not found in the list" << endl;
+        return;
+    }
+    return deleteNode(head, counter);
+}
 
 
 int main(){
-    cout << "Hello world from Ubuntu Studio\n";
-    LinkedList l;
-    l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(1,0);
-    l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(3,-1);
-    l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(0,0);
-    l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(2,2);
-    l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(4,-1);
-    l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(10,10);
-    l.disp();
-    cout << "List size: " << l.size() << endl;
+    Node *head = new Node();
+    disp(head);
+    insertNode(&head, 5, 0);
+    disp(head);
+    insertNode(&head, 2, -1);
+    disp(head);
+    insertNode(&head, 3, 1);
+    disp(head);
+    insertNode(&head, 4, 2);
+    disp(head);
+    insertNode(&head, 15, 10);
+    disp(head);
+    insertNode(&head, 6, -1);
+    disp(head);
+    insertNode(&head, 7, 6);
+    disp(head);
+    insertNode(&head, 9, 1);
+    disp(head);
 
-    return 0;
+    cout << "Deleting nodes from here: " << endl;
+    deleteNode(&head, 0);
+    disp(head);
+    deleteNode(&head, 9);
+    disp(head);
+    deleteNode(&head, 2);
+    disp(head);
+    deleteNode(&head, -1);
+    disp(head);
+
+    cout << "Deleting nodes through key:" << endl;
+    searchAndDelete(&head, 6);
+    disp(head);
+    searchAndDelete(&head, 26);
+    disp(head);
+
+
+    return 0;    
 }
