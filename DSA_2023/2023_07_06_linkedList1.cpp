@@ -54,29 +54,70 @@ class LinkedList{
     }
 
 
-    void insert_at_pos(int data, int pos){
-        if(pos > this->size()){
-            cout << "Error: Size is lesser [" << this->size() << "] than given position " << pos << endl;
-            return;
-        }
+    void insertAt(int pos, int data){
         if(pos==0){
             Node *temp = new Node(data);
             temp->next = head;
             head = temp;
         }
         else if(pos == -1){ //insert at end
-            insert_at_pos(data, this->size());
+            pos=0;
+            Node *temp = head;
+            while(temp != nullptr){
+                temp = temp->next;
+                pos++;
+            }
+            insertAt(pos, data);
         }
         else{ //insert at middle or end
-            int count = 0;
+            int count = 1;
             Node *iter = head;
             Node *temp = new Node(data);
-            while(iter->next != nullptr && count !=pos-1){
+            while(iter->next != nullptr && count !=pos){
                 iter = iter->next;
                 count++;
             }
+            if(count >pos){
+                cout << "Error: Delete index is larger than list size!" << endl;
+                return;
+            }
             temp->next = iter->next;
             iter->next = temp;
+        }
+    }
+
+    void deleteFrom(int pos){
+        Node *temp = head;
+        if(pos == 0){
+            head = head->next;
+            delete(temp);
+            return;
+        }
+        else if(pos == -1){
+            pos=0;
+            while(temp->next != nullptr){
+                temp = temp->next;
+                pos++;
+            }
+            return deleteFrom(pos);
+        }
+        else{
+            while(pos >1){
+                temp = temp->next;
+                pos--;
+                if(temp= nullptr){
+                    cout << "Delete Error: position outside list size" << endl;
+                    return;
+                }
+            }
+            Node *temp2 = temp->next;
+            if(temp2->next == nullptr){
+                temp->next = nullptr;
+            }
+            else{
+                temp->next = temp->next->next;
+            }
+            delete(temp2);
         }
     }
 };
@@ -86,25 +127,27 @@ int main(){
     cout << "Hello world from Ubuntu Studio\n";
     LinkedList l;
     l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(1,0);
+    l.insertAt(0,1);
     l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(3,-1);
+    l.insertAt(-1,3);
     l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(0,0);
+    l.insertAt(0,0);
     l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(2,2);
+    l.insertAt(2,2);
     l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(4,-1);
+    l.insertAt(-1,4);
     l.disp();
-    cout << "List size: " << l.size() << endl;
-    l.insert_at_pos(10,10);
+    l.insertAt(10,10);
     l.disp();
-    cout << "List size: " << l.size() << endl;
+
+
+
+    l.deleteFrom(0);
+    l.disp();
+    l.deleteFrom(1);
+    l.disp();
+    l.deleteFrom(-1);
+    l.disp();
 
     return 0;
 }
