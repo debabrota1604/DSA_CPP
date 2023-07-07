@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Returns the lists of lists where each element of the array can be selected multiple times
 class Solution {
 public:    
     vector<vector<int>> ans;
@@ -8,12 +9,10 @@ public:
      void dfs(int index, int target, vector<int> tempSum){
         cout << "Call stack: " << target << " ";
         show1dVector(tempSum);
-
-
+        if(target == 0){
+            ans.emplace_back(tempSum);
+        }
         for(int iter = index; iter< this->candidates.size(); iter++){
-            if(target == 0){
-                ans.emplace_back(tempSum);
-            }
             if(target - candidates[iter] >=0){
                 tempSum.emplace_back(candidates[iter]);
                 dfs(iter, target - candidates[iter], tempSum );
@@ -33,9 +32,11 @@ public:
         for (int i=0; i< v.size(); i++){
             cout << "[";
             for (int j=0; j<v[i].size(); j++){
-                cout << v[i][j] << ",";
+                cout << v[i][j];
+                if(j!= v[i].size()-1) cout << ",";
             }
-            cout << " ],";
+            cout << "]";
+            if(i!= v.size()-1) cout << ", ";
         }
         cout << " ]" << endl;
     }
@@ -43,7 +44,8 @@ public:
     void show1dVector(vector<int> v){
         cout << "[";
         for(int i=0; i<v.size();i++){
-            cout << v[i] << ",";
+            cout << v[i];
+            if(i!= v.size()-1) cout << ",";
         }
         cout << "]\n";
     }
