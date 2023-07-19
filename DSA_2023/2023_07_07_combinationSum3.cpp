@@ -69,7 +69,7 @@ int main(){
     Solution s;
 
     cout << "Result: " << endl;
-    s.show2dVector(s.combinationSum3(4,1));
+    s.show2dVector(s.combinationSum3(4,20));
 
     return 0;
 }

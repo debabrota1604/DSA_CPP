@@ -1,8 +1,8 @@
 //This function computes the maximum number of elements resulting in the sum provided as target
+// the elements might not be contiguous in the array
 
 #include<bits/stdc++.h>
 using namespace std;
-vector<int> inp {2,3,5,4,1,1,3};
 unordered_map<int,unordered_map<int,int>> memo;
 
 
@@ -16,10 +16,10 @@ int findKey(int k1, int k2){
 }
 
 
-int subsetSum(int setSize, int target){
+int subsetSum(vector<int>& inp, int setSize, int target){
     int history = findKey(setSize, target);
     if(history != -1){
-        cout << "Returning from history: " << setSize << "," << target << ": " << history << endl;
+        //cout << "Returning from history: " << setSize << "," << target << ": " << history << endl;
         return history;
     }
 
@@ -28,20 +28,38 @@ int subsetSum(int setSize, int target){
         else return false;
     }
     if(target-inp[setSize-1] < 0){
-        memo[setSize][target] = subsetSum(setSize-1, target);
+        memo[setSize][target] = subsetSum(inp, setSize-1, target);
     }
     else{
-        memo[setSize][target] = max(subsetSum(setSize-1, target-inp[setSize-1]), subsetSum(setSize-1, target));
+        memo[setSize][target] = max(subsetSum(inp, setSize-1, target-inp[setSize-1]), subsetSum(inp, setSize-1, target));
     }
     return memo[setSize][target];
 }
 
+// Working code
+int solve(vector<int>& inp, int target, vector<int>& tempSet, int lastIndex){
+    if(target == 0 ) return tempSet.size();
+    if(lastIndex ==0 && target != 0 ) return 0;
+    
+    int op1, op2 = INT_MIN;
+    op1 = solve(inp, target, tempSet, lastIndex-1); //not considering last element in the selected set
+    if(inp[lastIndex] <= target){
+        tempSet.emplace_back(inp[lastIndex]);
+        op2 = solve(inp, target - inp[lastIndex], tempSet, lastIndex-1);
+        tempSet.pop_back();
+    }
+
+    return max(op1, op2);    
+}
+
 
 int main(){
+    vector<int> inp {3, 34, 4, 12, 5, 2};
+    int target = 9;
+    vector<int> temp;
+    cout << solve(inp, target, temp, inp.size()-1) << endl;
 
-    int target = 10;
-
-    cout << "The maximum number of elements summing to " << target << " is " << subsetSum(inp.size(), target) << endl;
+    cout << "The maximum number of elements summing to " << target << " is " << subsetSum(inp, inp.size(), target) << endl;
 
 
     cout << "Map size: " << memo.size() << endl;

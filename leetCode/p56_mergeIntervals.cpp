@@ -34,6 +34,10 @@ public:
             iter2 = iter+1;
             
             while(iter2 < intervals.size()){
+
+                if(intervals[iter2][1] <= temp[1]){
+                    
+                }
                 
                 // If start of second interval is greater than finish time of first interval, they cannot be merged. 
                 if(intervals[iter2][0] > temp[1]){
@@ -41,7 +45,7 @@ public:
                     iter = iter2;
                     break;
                 }
-                //Else extend the present interval's finish time to include second interval
+                // Else extend the present interval's finish time to include second interval
                 temp[1] = max(temp[1], intervals[iter2][1]);
                 iter2++;
             }

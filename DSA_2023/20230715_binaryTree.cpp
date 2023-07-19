@@ -207,6 +207,7 @@ int main(){
     t.head = t.buildTree(t.head);
     cout << "Level order traversal: " << endl;
     t.levelOrderTraversal(t.head);
+    
     cout << "In order traversal: " << endl;
     t.inorderTraversal(t.head);
     cout << endl;

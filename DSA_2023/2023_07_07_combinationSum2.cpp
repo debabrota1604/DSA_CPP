@@ -13,9 +13,7 @@ public:
         }
         
         for(int iter = curInd; iter < candidates.size(); iter++){
-            // This check is special for this problem. 
-            // if present candidate is equal to the last candidate, skip this call
-            // This cannot be done later
+            // If the index not start index and the current character is same as previous, do not consider.
             if(iter != curInd && candidates[iter]==candidates[iter-1]) continue;
             
             if(target-candidates[iter] >= 0){

@@ -10,9 +10,13 @@ class Solution{
     vector<vector<int>> result;
     void computePermutations(vector<int> tempArr){
         if(tempArr.size() != array.size()){
+            //loop through all array elements and find the non occuring element
             for(int iter = 0; iter<array.size(); iter++){
+                // If element already present in the array, do not call recursion
                 if(find(tempArr.begin(), tempArr.end(), array[iter]) != tempArr.end()) continue;
                 else if(iter>0 && array[iter] == array[iter-1]) continue;
+
+                // Call backtracking with each element
                 tempArr.emplace_back(array[iter]);
                 computePermutations(tempArr);
                 tempArr.pop_back();

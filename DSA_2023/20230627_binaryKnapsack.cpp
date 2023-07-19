@@ -19,11 +19,15 @@ class Knapsack{
         if(index <0) return 0;
         else if(memo.find(index) != memo.end() && memo[index].find(availableCapacity) != memo[index].end()) return memo[index][availableCapacity];
         else{
+            // Calculate weight without the present indexed item
             memo[index][availableCapacity] = maxValueSelection(index-1,availableCapacity);
+
             if(availableCapacity-weights[index] >=0){
+                // Update the value if weight considering current index item is greater.
                 memo[index][availableCapacity] = max(memo[index][availableCapacity],maxValueSelection(index-1, availableCapacity-weights[index]) + values[index]);
             }
-            cout << index << "," << availableCapacity << ":" << memo[index][availableCapacity] << endl;
+
+            //cout << index << "," << availableCapacity << ":" << memo[index][availableCapacity] << endl;
             return memo[index][availableCapacity];
         }
     }

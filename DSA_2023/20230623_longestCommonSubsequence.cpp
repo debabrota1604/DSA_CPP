@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Subsequence means non-contiguous substring
+
 class LongestCommonSubstring{
     string s1,s2;
     unordered_map<int,unordered_map<int,int>> memo;
@@ -29,15 +31,14 @@ class LongestCommonSubstring{
         if(val != -1) return val;
 
 
-        int l1=0,l2=0,l3=0,l4=0;
+        int l1=0,l2=0,l3=0;
         l1=lcs(ind1-1,ind2  );
         l2=lcs(ind1,  ind2-1);
-        l3=lcs(ind1-1,ind2-1);
         if(s1[ind1-1] == s2[ind2-1]){
-            l4 = lcs(ind1-1,ind2-1) +1;
+            l3=lcs(ind1-1,ind2-1) +1;
         }
-        int arr[] {l1,l2,l3,l4};
-        int res =  *max_element(arr, arr+4);
+
+        int res =  max(l1, max(l2, l3));
         cout << "[" << ind1 << "," << ind2 << "]: " << res << endl;
         memorise(ind1, ind2, res);
         return res;
@@ -46,9 +47,10 @@ class LongestCommonSubstring{
 
 
 int main(){
-    LongestCommonSubstring sSeq("abcde","ab");
+    string s1 = "AGGTAB", s2="GXTXAYB";
+    LongestCommonSubstring sSeq(s1, s2);
 
-    cout << "Result is: " << sSeq.lcs(4,1) << endl;
+    cout << "Result is: " << sSeq.lcs(s1.size(), s2.size()) << endl;
 
 
 }
