@@ -1,0 +1,44 @@
+Design patterns are reusable solutions to commonly occurring software design problems. 
+They provide a structured approach to designing software that enhances flexibility, maintainability, and reusability. Here are some different types of design patterns:
+
+Creational Patterns:
+    Singleton: Ensures a class has only one instance and provides a global point of access to that instance.
+    Factory Method: Creates objects without specifying the exact class of the object that will be created.
+    Abstract Factory: Creates families of related or dependent objects without specifying their concrete classes.
+
+Structural Patterns:
+    Adapter: Allows objects with incompatible interfaces to work together by providing a wrapper or adapter.
+    Decorator: Adds behavior or responsibilities to objects dynamically without modifying their code.
+    Proxy: Provides a surrogate or placeholder for another object to control access to it.
+
+Behavioral Patterns:
+    Observer: Defines a dependency between objects so that when one object changes state, its dependents are notified and updated automatically.
+    Strategy: Encapsulates interchangeable behaviors, allowing an object to change its behavior dynamically at runtime.
+    Command: Encapsulates a request as an object, thereby allowing parameterization of clients with different requests, queuing of requests, and logging of the requests.
+
+Architectural Patterns:
+    Model-View-Controller (MVC): Separates an application into three interconnected components: the model (data), the view (user interface), and the controller (handling user input).
+    Model-View-ViewModel (MVVM): Similar to MVC, but specifically designed for user interfaces, with the view model acting as an intermediary between the view and the model.
+
+Concurrency Patterns:
+    Producer-Consumer: Allows multiple threads (producers and consumers) to communicate with each other efficiently through a shared buffer.
+    Reader-Writer: Manages concurrent access to a shared resource, allowing multiple readers but only one writer at a time.
+
+Data Access Patterns:
+    Repository: Provides a separation between the domain and data access layers, allowing easier management and querying of data.
+    Data Mapper: Maps data between objects in the domain model and a relational database, isolating them from each other.
+
+Messaging Patterns:
+    h-Subscribe: Allows decoupling between message senders (publishers) and message receivers (subscribers) by using a central message broker.
+
+Anti-Patterns:
+    common design pitfalls and bad practices that should be avoided in software development. Examples include God Object, Spaghetti Code, and Reinventing the Wheel.
+
+
+Design patterns are a valuable tool for software developers, as they provide proven solutions to recurring problems. 
+Understanding and applying design patterns can lead to more maintainable, extensible, and efficient software solutions. 
+However, it's essential to use design patterns judiciously, considering the specific requirements and context of the project.
+
+
+
+

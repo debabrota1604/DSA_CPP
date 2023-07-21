@@ -1,0 +1,46 @@
+System call wrapper library functions are functions provided by the operating system or external libraries 
+that encapsulate low-level system calls and provide a higher-level, more convenient interface for programmers. 
+These wrapper functions often handle errors, simplify parameter passing, and provide additional functionality 
+compared to the raw system calls. Using these wrappers can make system programming easier and more portable. 
+
+Below are some examples of commonly used system call wrapper library functions in C/C++:
+
+1. Standard C Library Functions:
+    fopen() and fclose(): Wrappers for opening and closing files, providing a higher-level file I/O interface.
+    fread() and fwrite(): Wrappers for reading and writing data to files, abstracting away the raw read() and write() system calls.
+    malloc() and free(): Wrappers for memory allocation and deallocation, making it easier to manage dynamic memory.
+
+2. Standard Input/Output Library Functions:
+    printf() and scanf(): Wrappers for formatted output and input, making it easier to display and read data from the console.
+    getchar() and putchar(): Wrappers for reading and writing individual characters from/to the console.
+
+
+3. Networking Library Functions:
+    socket(): A wrapper for creating a socket for network communication, simplifying the process of setting up network connections.
+    bind() and connect(): Wrappers for binding a socket to an address and connecting to a remote address in a network application.
+
+
+4. Thread Management Library Functions:
+    pthread_create(): A wrapper for creating threads, encapsulating the low-level thread creation system call.
+    pthread_join(): A wrapper for joining threads, abstracting away the details of thread synchronization.
+
+
+5. File System Library Functions:
+    mkdir() and rmdir(): Wrappers for creating and removing directories, providing a convenient way to manage file system directories.
+    opendir(), readdir(), and closedir(): Wrappers for working with directories, simplifying directory traversal.
+
+
+6. Error Handling Library Functions:
+    perror(): A wrapper for printing an error message based on the current value of errno, providing more descriptive error messages.
+    strerror(): A wrapper for converting an error number to a human-readable error message.
+
+
+7. Time and Date Library Functions:
+    time(): A wrapper for obtaining the current time in seconds since the epoch.
+    ctime(): A wrapper for converting a time value to a human-readable string representation.
+
+
+These are just a few examples of system call wrapper library functions commonly used in C/C++ programming. 
+Many programming environments, operating systems, and libraries provide additional wrapper functions to make 
+system programming easier and more portable across different platforms. When available, it's often beneficial 
+to use these higher-level wrappers instead of making raw system calls directly to improve code readability, maintainability, and portability.
