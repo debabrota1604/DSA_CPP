@@ -195,6 +195,69 @@ class Tree{
         bool cond = root->data == p1.second + p2.second;
         return make_pair(p1.first & p2.first & cond, root->data);
     }
+
+    void recursiveMark_topView(deque<pair<int, int>>& q, Node *root, int index){
+        if(!root) return;
+
+        if(index < q.front().second){ //new left node found
+            q.emplace_front(make_pair(root->data, index));
+        }
+        else if(index > q.back().second){
+            q.emplace_back(make_pair(root->data, index));
+        }
+
+        if(root->l) recursiveMark_topView(q, root->l, index-1);
+        if(root->r) recursiveMark_topView(q, root->r, index+1);
+    }
+
+    void topView(){
+        
+        // Step1: Associate an integer with each node. Root at 0, each left child gets root-1 and right gets root+1;
+        // Step2: Initialize a queue to hold both node and its index.
+        deque<pair<int, int>> q;
+        recursiveMark_topView(q, head, 0);
+        
+        // Step3: Traverse the array and check if it's index is outside the queue marks or not. If not, isert it in front or rear of queue.
+        
+        // Step4: Once whole tree is traversed, print the queue. 
+        while(!q.empty()){
+            cout << q.front().first << " ";
+            q.pop_front();
+        }
+        cout << endl;
+    }
+    void recursiveMark_bottomView(deque<pair<int, int>>& q, Node *root, int index){
+        if(!root) return;
+
+
+        if(root->l) recursiveMark_topView(q, root->l, index-1);
+        if(root->r) recursiveMark_topView(q, root->r, index+1);
+
+
+        if(index < q.front().second){ //new left node found
+            q.emplace_front(make_pair(root->data, index));
+        }
+        else if(index > q.back().second){
+            q.emplace_back(make_pair(root->data, index));
+        }
+    }
+
+    void bottomView(){
+        
+        // Step1: Associate an integer with each node. Root at 0, each left child gets root-1 and right gets root+1;
+        // Step2: Initialize a queue to hold both node and its index.
+        deque<pair<int, int>> q;
+        recursiveMark_bottomView(q, head, 0);
+        
+        // Step3: Traverse the array and check if it's index is outside the queue marks or not. If not, isert it in front or rear of queue.
+        
+        // Step4: Once whole tree is traversed, print the queue. 
+        while(!q.empty()){
+            cout << q.front().first << " ";
+            q.pop_front();
+        }
+        cout << endl;
+    }
 };
 
 
@@ -222,6 +285,10 @@ int main(){
     t.leftView();
     cout << "Right view of the tree: " << endl;
     t.rightView();
+    cout << "Top view of the tree: " << endl;
+    t.topView();
+    cout << "Bottom view of the tree: " << endl;
+    t.bottomView();
 
     cout << "Mirror of the tree: " << endl;
     Node *mirror = nullptr;
