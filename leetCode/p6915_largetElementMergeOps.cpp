@@ -9,12 +9,14 @@ public:
         list<int>  deleted {0};
                 
         //Step2: Traverse the list from right to left and replace elements
-        auto iter = inp.rbegin(), pre = iter; auto delEL = inp.begin(); iter++;
+        auto iter = inp.rbegin(), pre = iter; 
+        iter++;
+
         while(iter !=inp.rend()){ 
             if(*iter <= *pre){
                 // Add iter to pre and delete pre.
                 *pre += *iter;
-                deleted.splice(deleted.begin(), inp, iter);
+                deleted.splice(deleted.begin(), inp, iter.base());
                 iter = pre++;
             }
             else{

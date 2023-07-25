@@ -12,7 +12,9 @@ std::condition_variable cv;
 int resourceCounter = 2; // Semaphore with 2 resources available
 
 /*
-A mutex (short for mutual exclusion) is a locking mechanism used to protect shared resources from simultaneous access by multiple threads. A mutex allows only one thread to acquire the lock at a time. If a thread attempts to acquire the mutex while it's already locked by another thread, the thread will be blocked (put to sleep) until the mutex becomes available.
+A mutex (short for mutual exclusion) is a locking mechanism used to protect shared resources from simultaneous access by multiple threads. 
+A mutex allows only one thread to acquire the lock at a time. 
+If a thread attempts to acquire the mutex while it's already locked by another thread, the thread will be blocked (put to sleep) until the mutex becomes available.
 Example of Mutex:
 */
 void sharedResourceAccess_mutex() {
@@ -23,7 +25,10 @@ void sharedResourceAccess_mutex() {
 }
 
 /*
-A semaphore is a synchronization mechanism that allows multiple threads to access shared resources while limiting the number of threads that can access the resource simultaneously. It maintains a counter that represents the number of available resources. Threads can request access to the semaphore, and if the counter is greater than zero, the thread can proceed to access the resource. When a thread is done using the resource, it releases the semaphore, incrementing the counter and allowing other waiting threads to acquire the resource.
+A semaphore is a synchronization mechanism that allows multiple threads to access shared resources while limiting the number of threads that can access the resource simultaneously. 
+It maintains a counter that represents the number of available resources. 
+Threads can request access to the semaphore, and if the counter is greater than zero, the thread can proceed to access the resource. 
+When a thread is done using the resource, it releases the semaphore, incrementing the counter and allowing other waiting threads to acquire the resource.
 Example of Semaphore:
 */
 bool isResourceAvailable2() {
