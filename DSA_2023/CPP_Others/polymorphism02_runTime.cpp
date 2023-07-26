@@ -1,10 +1,7 @@
 #include <iostream>
 
 /*
-Run-Time Polymorphism (Virtual Functions):
-Run-time polymorphism is achieved through virtual functions and dynamic binding. 
-It allows a derived class to provide its own implementation of a virtual function, 
-and the appropriate function is determined at run-time based on the actual object's type.
+Run-Time Polymorphism (Virtual Functions): Run-time polymorphism is achieved through virtual functions and dynamic binding. It allows a derived class to provide its own implementation of a virtual function,  and the appropriate function is determined at run-time based on the actual object's type.
 */
 
 
@@ -43,8 +40,7 @@ int main() {
 }
 
 /*
-Run-time polymorphism is achieved through virtual functions, which allow derived classes 
-Circle and Square to provide their own implementations of the draw() function. 
+Run-time polymorphism is achieved through virtual functions, which allow derived classes  Circle and Square to provide their own implementations of the draw() function. 
 
 The actual implementation of the function to call is determined at run time based on the object's type during the program's execution.
 */

@@ -1,11 +1,7 @@
 #include <iostream>
 
 /*
-Compile-Time Polymorphism (Function Overloading):
-Function overloading is a form of compile-time polymorphism where multiple functions 
-with the same name but different parameter lists can be defined in the same scope. 
-The appropriate function is called based on the number or type of arguments passed during compilation.
-
+Compile-Time Polymorphism (Function Overloading): Function overloading is a form of compile-time polymorphism where multiple functions with the same name but different parameter lists can be defined in the same scope. The appropriate function is called based on the number or type of arguments passed during compilation.
 */
 
 class MathOperations {
@@ -28,6 +24,5 @@ int main() {
 }
 
 /*
-In this example, we have two types of polymorphism. Function overloading allows the MathOperations class to have two add() 
-functions with different parameter types, and the appropriate function is chosen at compile time based on the arguments passed.
+In this example, we have two types of polymorphism. Function overloading allows the MathOperations class to have two add() functions with different parameter types, and the appropriate function is chosen at compile time based on the arguments passed.
 */

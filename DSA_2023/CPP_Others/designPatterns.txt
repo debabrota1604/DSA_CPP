@@ -1,5 +1,4 @@
-Design patterns are reusable solutions to commonly occurring software design problems. 
-They provide a structured approach to designing software that enhances flexibility, maintainability, and reusability. Here are some different types of design patterns:
+Design patterns are reusable solutions to commonly occurring software design problems. They provide a structured approach to designing software that enhances flexibility, maintainability, and reusability. Here are some different types of design patterns:
 
 Creational Patterns:
     Singleton: Ensures a class has only one instance and provides a global point of access to that instance.
@@ -35,9 +34,7 @@ Anti-Patterns:
     common design pitfalls and bad practices that should be avoided in software development. Examples include God Object, Spaghetti Code, and Reinventing the Wheel.
 
 
-Design patterns are a valuable tool for software developers, as they provide proven solutions to recurring problems. 
-Understanding and applying design patterns can lead to more maintainable, extensible, and efficient software solutions. 
-However, it's essential to use design patterns judiciously, considering the specific requirements and context of the project.
+Design patterns are a valuable tool for software developers, as they provide proven solutions to recurring problems. Understanding and applying design patterns can lead to more maintainable, extensible, and efficient software solutions. However, it's essential to use design patterns judiciously, considering the specific requirements and context of the project.
 
 
 

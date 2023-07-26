@@ -2,8 +2,7 @@
 #include <omp.h>
 
 /*
-OpenMP is a set of compiler directives and library routines that support parallel 
-programming in C++. It simplifies the process of parallelizing loops and tasks using pragmas.
+OpenMP is a set of compiler directives and library routines that support parallel programming in C++. It simplifies the process of parallelizing loops and tasks using pragmas.
 */
 
 int main() {

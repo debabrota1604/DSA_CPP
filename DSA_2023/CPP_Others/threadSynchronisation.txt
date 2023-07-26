@@ -4,43 +4,29 @@ can work together safely and avoid data races and other concurrency-related issu
 Some of the main thread synchronization options in C++ include:
 
 1. Mutex (std::mutex):
-    Mutex (short for mutual exclusion) is a synchronization primitive that allows only one thread to access a shared 
-    resource (e.g., a variable or data structure) at a time.
-    Threads must acquire the lock (mutex) before accessing the shared resource and release it after completing the operation.
-    std::mutex is a standard C++ mutex provided by the <mutex> header.
+    Mutex (short for mutual exclusion) is a synchronization primitive that allows only one thread to access a shared resource (e.g., a variable or data structure) at a time.
+    Threads must acquire the lock (mutex) before accessing the shared resource and release it after completing the operation. std::mutex is a standard C++ mutex provided by the <mutex> header.
 
 
 2. Recursive Mutex (std::recursive_mutex):
-    Recursive mutex allows the same thread to acquire the lock multiple times without causing a deadlock. 
-    It keeps track of the number of times the same thread has acquired the lock and requires the same number of releases to fully unlock the mutex.
-    std::recursive_mutex is a standard C++ recursive mutex provided by the <mutex> header.
+    Recursive mutex allows the same thread to acquire the lock multiple times without causing a deadlock. It keeps track of the number of times the same thread has acquired the lock and requires the same number of releases to fully unlock the mutex. std::recursive_mutex is a standard C++ recursive mutex provided by the <mutex> header.
 
 
 3. Timed Mutex (std::timed_mutex):
     Timed mutex allows a thread to attempt to acquire the lock for a certain duration of time. 
-    If the lock is not available during that time, the thread can choose to perform alternative actions or try again later.
-    std::timed_mutex is a standard C++ timed mutex provided by the <mutex> header.
+    If the lock is not available during that time, the thread can choose to perform alternative actions or try again later. std::timed_mutex is a standard C++ timed mutex provided by the <mutex> header.
 
 
 4. Condition Variable (std::condition_variable):
-    Condition variables allow threads to wait for a specific condition to become true before proceeding with their execution.
-    Condition variables work in conjunction with a mutex. When a thread waits on a condition variable, 
-    it atomically releases the associated mutex, allowing other threads to access the shared resource.
-    std::condition_variable is a standard C++ condition variable provided by the <condition_variable> header.
+    Condition variables allow threads to wait for a specific condition to become true before proceeding with their execution. Condition variables work in conjunction with a mutex. When a thread waits on a condition variable, it atomically releases the associated mutex, allowing other threads to access the shared resource. std::condition_variable is a standard C++ condition variable provided by the <condition_variable> header.
 
 
 5. Semaphore (std::counting_semaphore):
-    A semaphore is a synchronization primitive that allows multiple threads to access a shared resource with a limited capacity simultaneously.
-    std::counting_semaphore is a standard counting semaphore provided by the <semaphore> header. It is available from C++20 onwards.
+    A semaphore is a synchronization primitive that allows multiple threads to access a shared resource with a limited capacity simultaneously. std::counting_semaphore is a standard counting semaphore provided by the <semaphore> header. It is available from C++20 onwards.
 
 
 6. Barrier (std::barrier):
-A barrier is a synchronization primitive that allows multiple threads to synchronize at a specific point in the execution 
-and proceed only when all threads have reached the barrier.
-std::barrier is a standard C++ barrier provided by the <barrier> header. It is available from C++20 onwards.
+A barrier is a synchronization primitive that allows multiple threads to synchronize at a specific point in the execution and proceed only when all threads have reached the barrier. std::barrier is a standard C++ barrier provided by the <barrier> header. It is available from C++20 onwards.
 
 
-These are some of the key thread synchronization options available in C++. Each of these options serves different purposes 
-and can be used to manage the coordination and communication between threads in concurrent programs. 
-When working with multithreaded code, it's essential to use these synchronization mechanisms appropriately to avoid 
-race conditions and ensure the correct behavior of the program.
+These are some of the key thread synchronization options available in C++. Each of these options serves different purposes and can be used to manage the coordination and communication between threads in concurrent programs. When working with multithreaded code, it's essential to use these synchronization mechanisms appropriately to avoid race conditions and ensure the correct behavior of the program.

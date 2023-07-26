@@ -2,9 +2,7 @@
 #include <thread>
 
 /*
-C++11 introduced the <thread> header, which provides a native multithreading API. 
-It allows you to create and manage threads using the std::thread class. 
-You can launch new threads and join them later to synchronize their execution.
+C++11 introduced the <thread> header, which provides a native multithreading API. It allows you to create and manage threads using the std::thread class. You can launch new threads and join them later to synchronize their execution.
 */
 
 void threadFunction() {

@@ -1,10 +1,20 @@
 /*
-This program aims to find the distance between two given vertices in an undirected unweighted graph.
-We can use BFS as the first time it encounters a vertex it would be the shorted path to that vertex.
+This program aims to find all possible paths between two given vertices in an undirected unweighted graph.
 */
 
 #include <bits/stdc++.h>
 using namespace std;
+
+// Stores visited path in the queue
+struct QueueNode{
+    int vertex;
+    string pathFromSource;
+
+    QueueNode(int v, string p): vertex(v), pathFromSource(p){}
+    int getVertex(){ return vertex; }
+    string getPath(){ return pathFromSource; }
+};
+
 
 void addEdge(vector<vector<int>>& adj, int source, int destination){
 	adj[source].push_back(destination);
@@ -12,63 +22,65 @@ void addEdge(vector<vector<int>>& adj, int source, int destination){
 }
 
 // Modified BFS call with path length update
-bool BFS(vector<vector<int>>& adj, vector<int>& parent, vector<int>& distance, int source, int destination){
-	list<int> queue; // Holds the BFS vertices as discovered
+vector<string> BFS(vector<vector<int>>& adj, int source, int destination){
+	list<QueueNode> queue; // Holds the BFS vertices as discovered
 	vector<bool> visited (adj.size(), false); // initially all vertices are not visited.
+    vector<string> paths;
 
     // initializing the BFS Queue with start vertes=x
 	visited[source] = true;
-	distance[source] = 0;
-	queue.push_back(source);
+    QueueNode src (source, to_string(source));
+	queue.push_back(src);
 
 	while (!queue.empty()) {
         // Until queue gets empty, pick one vertex from queue and process
-		int u = queue.front();
+		QueueNode frontNode = queue.front();
 		queue.pop_front();
+        int u = frontNode.getVertex();
 
         // For the current neighbour, if its not visited, mark it as visited and update the distance vector
 		for (int i = 0; i < adj[u].size(); i++) {
 			if (visited[adj[u][i]] == false) {
-				visited[adj[u][i]] = true;
-				distance[adj[u][i]] = distance[u] + 1;
-				parent[adj[u][i]] = u;
-				queue.push_back(adj[u][i]);
+                //Do not mark destination as visited to find all possible paths
+				if(adj[u][i] != destination) visited[adj[u][i]] = true;
+
+                //Store the neighbour to the queue
+                string newPath = frontNode.getPath()+ to_string(adj[u][i]);
+                QueueNode newNode(adj[u][i], newPath);
+				queue.push_back(newNode);
 
                 // If we reached the destination vertex by BFS, it is through the shortest path from start by BFS rule. 
-				if (adj[u][i] == destination) return true;
+				if (adj[u][i] == destination) paths.emplace_back(newPath);
 			}
 		}
 	}
-    // Control reaches here when all vertices have been traversed by BFS but destination not found. Return error status.
-	return false;
+    // Control reaches here when all vertices have been traversed by BFS.
+	return paths;
 }
 
 // This function calls BFS and constructs the path from source to destination using parent vector
 void computeShortedDistanceBFS(vector<vector<int>>& adj, int source, int destination)
 {
-    // Parent array stores the immediate parent to any discovered vertex. Needed to find the path to destination.
-	vector<int> parent (adj.size(),-1), distance (adj.size(), INT_MAX);
+    //Call BFS and check the results. BFS ensures results are sorted in ascending order of path length.
+    vector<string> res = BFS(adj, source, destination);
 
-	if (BFS(adj, parent, distance, source, destination) == false) {
+	if (res.empty()) {
 		cout << "Error: Source and destination are not connected in this graph.\n";
 		return;
 	}
+    else{// Output statements
+        cout << "Possible paths between " << source << " and " << destination << " is: " << endl;
 
-    // BFS returned true. So, check the parent vector to construct the path to destination
-	vector<int> path;
-	int iter = destination;
-	path.push_back(iter);
-	while (parent[iter] != -1) { // start vertex has parent as -1
-		path.push_back(parent[iter]);
-		iter = parent[iter];
-	}
-
-    // Output statements
-	cout << "Shortest path length between " << source << " and " << destination << " is: " << distance[destination] << endl;
-
-	cout << "The path from source to destination can be found through these vertices: ";
-	for(int iter = path.size()-1; iter >= 0; iter--)	cout << path[iter] << " ";
-    cout << endl;
+        // Print all possible paths with their lengths
+        for(int iter=0; iter<res.size(); iter++){
+            cout << "Length " << res[iter].size() << ": ";
+            for(int iter2=0; iter2<res[iter].size(); iter2++){
+                cout << res[iter][iter2];
+                if(iter2 !=res[iter].size()-1) cout << "->";
+            }
+            cout << endl;
+        }
+    }    
 }
 
 int main()
@@ -79,17 +91,16 @@ int main()
     // Adding edges to the graph
 	addEdge(adj, 0, 1);
 	addEdge(adj, 0, 4);
+	addEdge(adj, 0, 9);
 	addEdge(adj, 1, 2);
 	addEdge(adj, 1, 4);
+	addEdge(adj, 2, 3);
 	addEdge(adj, 2, 7);
 	addEdge(adj, 3, 4);
-	addEdge(adj, 3, 7);
 	addEdge(adj, 4, 5);
 	addEdge(adj, 4, 6);
 	addEdge(adj, 5, 6);
 	addEdge(adj, 6, 3);
-	addEdge(adj, 6, 7);
-	addEdge(adj, 6, 9);
 	addEdge(adj, 7, 9);
 
     // This function does the BFS traversal and outputs result if both 0 & 9 are connected

@@ -23,7 +23,4 @@ C++11, also known as C++0x, was a significant update to the C++ language, bringi
     11. New Standard Library Features: Various new functions and containers added to the standard library, including std::unordered_map, std::unordered_set, and more.
 
 
-C++11 brought many enhancements and modernized the language significantly, making it easier to write more efficient, expressive, and maintainable code. 
-However, it's important to note that C++ has continued to evolve since C++11, with additional standards like C++14, C++17, and C++20, 
-each introducing further improvements and new features to the language and standard library. 
-Therefore, it's recommended to stay up-to-date with the latest standards for the most recent features and best practices in C++.
+C++11 brought many enhancements and modernized the language significantly, making it easier to write more efficient, expressive, and maintainable code.  However, it's important to note that C++ has continued to evolve since C++11, with additional standards like C++14, C++17, and C++20, each introducing further improvements and new features to the language and standard library. Therefore, it's recommended to stay up-to-date with the latest standards for the most recent features and best practices in C++.

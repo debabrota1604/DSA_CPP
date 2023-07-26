@@ -3,8 +3,7 @@
 #include <vector>
 
 /*
-C++17 introduced parallel algorithms to the STL, allowing you to perform some standard 
-algorithms in parallel using multiple threads. You can use std::execution::par as the execution policy for parallel execution.
+C++17 introduced parallel algorithms to the STL, allowing you to perform some standard algorithms in parallel using multiple threads. You can use std::execution::par as the execution policy for parallel execution.
 
 */
 

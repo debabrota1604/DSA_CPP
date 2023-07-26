@@ -1,10 +1,7 @@
 #include <iostream>
 
 /*
-To design a class that ensures only one instance of the object is created and 
-returned every time, you can implement the Singleton design pattern in C++. 
-The Singleton pattern restricts the instantiation of a class to only one object 
-and provides a global point of access to that object.
+To design a class that ensures only one instance of the object is created and  returned every time, you can implement the Singleton design pattern in C++. The Singleton pattern restricts the instantiation of a class to only one object and provides a global point of access to that object.
 
 Here's a simple implementation of a Singleton class in C++:
 */
@@ -49,13 +46,7 @@ int main() {
 }
 
 /*
-In this implementation, the Singleton class has a private constructor, which means 
-objects cannot be directly instantiated from outside the class. Instead, it 
-provides a public static method getInstance() that returns the single instance 
-of the class. The first time getInstance() is called, it creates a new instance 
-of the Singleton class. On subsequent calls, it returns the same instance that 
-was created earlier.
+In this implementation, the Singleton class has a private constructor, which means objects cannot be directly instantiated from outside the class. Instead, it provides a public static method getInstance() that returns the single instance of the class. The first time getInstance() is called, it creates a new instance of the Singleton class. On subsequent calls, it returns the same instance that was created earlier.
 
-By using this pattern, you can ensure that only one instance of the class is 
-created, and every time you request an object, you'll get the same instance.
+By using this pattern, you can ensure that only one instance of the class is created, and every time you request an object, you'll get the same instance.
 */
