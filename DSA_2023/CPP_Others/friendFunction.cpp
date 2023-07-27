@@ -1,8 +1,7 @@
 /*
 Friend Function: 
 
-In C++, a friend function is a function that is granted access to the private and protected members of a class, 
-even though it is not a member of that class. It is declared with the friend keyword within the class definition.
+In C++, a friend function is a function that is granted access to the private and protected members of a class, even though it is not a member of that class. It is declared with the friend keyword within the class definition.
 
 Here are some key points to understand about friend functions:
 
@@ -40,10 +39,7 @@ void friendFunction(MyClass1& obj) {
 
 /*
 Friend Classes:
-A friend class is a class that is declared as a friend inside another class.
-It has access to the private and protected members of the class that declares it as a friend.
-Friend classes can access the members of the declaring class, similar to the way member functions can.
-Friend classes can be useful when you want to grant access to a group of related classes.
+A friend class is a class that is declared as a friend inside another class. It has access to the private and protected members of the class that declares it as a friend. Friend classes can access the members of the declaring class, similar to the way member functions can. Friend classes can be useful when you want to grant access to a group of related classes.
 
 */
 

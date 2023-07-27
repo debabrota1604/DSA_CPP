@@ -6,7 +6,7 @@ In C++, there are several types of casting that allow you to convert one data ty
     Example: float num = static_cast<float>(5);
 
 2. Dynamic Cast:
-    Primarily used for handling polymorphic classes and pointers to base classes. Performs a runtime check to ensure safe downcasting from a base class pointer to a derived class pointer.     Returns a nullptr if the dynamic cast is not successful for a pointer, or throws std::bad_cast if used with references.    
+    Primarily used for handling polymorphic classes and pointers to base classes. Performs a runtime check to ensure safe downcasting from a base class pointer to a derived class pointer. Returns a nullptr if the dynamic cast is not successful for a pointer, or throws std::bad_cast if used with references.    
 
     Example: Derived* derivedPtr = dynamic_cast<Derived*>(basePtr);
 
