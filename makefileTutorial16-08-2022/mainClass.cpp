@@ -13,11 +13,9 @@ int main(){
     while (op1>0 && op1<6){
         //construct a menu
         if (op1==1){ //insert
-<<<<<<< HEAD
+
             cout << "  1. Insert at beginning\n  2. Insert at end\n  3. Insert at position\n  4. Load list from file\n  5.Print list\nYour choice: ";
-=======
-            cout << "  1. Insert at beginning\n  2. Insert at end\n  3. Insert at position\n  4. Print list\nYour choice: ";
->>>>>>> 645a4859a03730492de7d40b5c50da6ad927f396
+
             cin >> op1;
             if (op1 ==1){
                 cout << "Data: "; cin >> op2;
@@ -32,16 +30,14 @@ int main(){
                 cout << "Position: "; cin >> op3;
                 l.insertAtPos(op2, op3); l.disp();
             }
-<<<<<<< HEAD
+
             else if (op1==4){
                 string fName;
                 cout << "input fileName with extension: "; cin >> fName;
                 l.insertFromFile(fName); l.disp();
             }
             else if (op1==5) l.disp();
-=======
-            else if (op1==4) l.disp();
->>>>>>> 645a4859a03730492de7d40b5c50da6ad927f396
+
         }
         else if (op1==2){ //delete
             cout << "  1. Delete from beginning\n  2. Delete from end\n  3. Delete from position\n  4. Print list\nYour choice: ";
