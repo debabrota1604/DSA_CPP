@@ -18,5 +18,4 @@ Mutexes and semaphores are both synchronization mechanisms used to coordinate ac
     Mutex: Mutexes do not provide a signaling mechanism on their own. However, they can be used in combination with condition variables to implement signaling between threads.
     Semaphore: Semaphores can be used for signaling between threads. For example, a semaphore can be used to notify waiting threads when a certain event occurs.
 
-
 In summary, use mutexes when you need exclusive access to a shared resource and require a binary locking mechanism. Use semaphores when you need more general counting and signaling capabilities, especially when managing pools of resources or controlling the number of threads accessing a shared resource simultaneously. Both mutexes and semaphores play essential roles in managing concurrency and ensuring thread safety in multithreaded environments, and the choice between them depends on the specific synchronization requirements of the application.

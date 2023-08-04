@@ -9,7 +9,7 @@
 
 4. Synchronization: Since multiple processes can access the shared memory concurrently, proper synchronization mechanisms (e.g., semaphores, mutexes) are essential to avoid data corruption or race conditions. Synchronization ensures that only one process modifies the shared data at a time and prevents conflicts.
 
-5. Detaching and Cleaning Up:When a process no longer needs access to the shared memory, it can detach from the shared memory using the shmdt or munmap system calls. If all processes have detached from the shared memory, it can be deleted using the shmctl or shm_unlink system calls.
+5. Detaching and Cleaning Up: When a process no longer needs access to the shared memory, it can detach from the shared memory using the shmdt or munmap system calls. If all processes have detached from the shared memory, it can be deleted using the shmctl or shm_unlink system calls.
 
 Here's a simplified example in C of how shared memory can be used for IPC:
 */

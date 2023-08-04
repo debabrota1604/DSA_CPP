@@ -1,8 +1,7 @@
 In C++, there are several options for thread synchronization to ensure that multiple threads can work together safely and avoid data races and other concurrency-related issues. Some of the main thread synchronization options in C++ include:
 
 1. Mutex (std::mutex):
-    Mutex (short for mutual exclusion) is a synchronization primitive that allows only one thread to access a shared resource (e.g., a variable or data structure) at a time.
-    Threads must acquire the lock (mutex) before accessing the shared resource and release it after completing the operation. std::mutex is a standard C++ mutex provided by the <mutex> header.
+    Mutex (short for mutual exclusion) is a synchronization primitive that allows only one thread to access a shared resource (e.g., a variable or data structure) at a time. Threads must acquire the lock (mutex) before accessing the shared resource and release it after completing the operation. std::mutex is a standard C++ mutex provided by the <mutex> header.
 
 
 2. Recursive Mutex (std::recursive_mutex):

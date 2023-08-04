@@ -28,7 +28,7 @@ int main() {
 }
 
 
-// 2. Named Pipes (FIFOs): Named pipes are similar to anonymous pipes but provide a way for unrelated processes to communicate. They have a name associated with them and can be created using the mkfifo system call.
+//2. Named Pipes (FIFOs): Named pipes are similar to anonymous pipes but provide a way for unrelated processes to communicate. They have a name associated with them and can be created using the mkfifo system call.
 
 #include <unistd.h>
 #include <fcntl.h>
