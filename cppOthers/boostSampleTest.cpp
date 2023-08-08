@@ -2,7 +2,6 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 #include<bits/stdc++.h>
-
 using namespace std;
 
 class Employee {
@@ -17,8 +16,8 @@ class Employee {
 };
 
 int fun(){
-    //static int i=0;
-    int i = 0;
+    static int i=0;
+    //int i = 0;
     i++;
     return i;
 }

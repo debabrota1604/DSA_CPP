@@ -26,8 +26,4 @@ as well as support for real-time programming. Here are some key components relat
     C++ provides support for high-resolution clocks through the <chrono> header, which allows you to measure time intervals with high accuracy.
 
 
-It's important to note that real-time programming requires careful consideration of resource usage, deterministic behavior, 
-and responsiveness to meet specific timing requirements. In real-time systems, you must prioritize critical tasks and avoid 
-unnecessary overhead and non-deterministic behavior that can impact real-time performance. If you are working in a 
-real-time environment, it's essential to understand the platform's real-time capabilities and constraints and utilize 
-proper synchronization and scheduling mechanisms to ensure the desired behavior of the system.
+It's important to note that real-time programming requires careful consideration of resource usage, deterministic behavior,  and responsiveness to meet specific timing requirements. In real-time systems, you must prioritize critical tasks and avoid unnecessary overhead and non-deterministic behavior that can impact real-time performance. If you are working in a real-time environment, it's essential to understand the platform's real-time capabilities and constraints and utilize proper synchronization and scheduling mechanisms to ensure the desired behavior of the system.
