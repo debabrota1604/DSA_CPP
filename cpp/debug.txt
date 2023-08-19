@@ -1,0 +1,1545 @@
+This program converts a string into a new string with minimum cost in insert/delete/replace.
+Present cost settings are: Insert 1, Delete 1, Replace 1
+Enter first string: Enter second string: Entering med(0,0)...
+Entering med(1,1)...
+Entering med(2,2)...
+Entering med(3,3)...
+Entering med(4,4)...
+Entering med(5,5)...
+Entering med(6,6)...
+	MaxIndex: Returning with delete cost from A: 2
+Entering med(5,6)...
+	MaxIndex: Returning with delete cost from A: 3
+Entering med(6,5)...
+Entering med(7,6)...
+	MaxIndex: Returning with delete cost from A: 1
+Entering med(6,6)...
+	MaxIndex: Returning with delete cost from A: 2
+Entering med(7,5)...
+Entering med(8,6)...
+	MaxIndex: Returning with insert cost from B to A: 0
+For (7,5) comparing: 014
+Map entries are: 
+map[7,5]= 0
+	Returning after new Map entry (7,5)= 0
+For (6,5) comparing: 141
+Map entries are: 
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (6,5)= 1
+For (5,5) comparing: 142
+Map entries are: 
+map[5,5]= 2
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (5,5)= 2
+Entering med(4,5)...
+Entering med(5,6)...
+	MaxIndex: Returning with delete cost from A: 3
+Entering med(4,6)...
+	MaxIndex: Returning with delete cost from A: 4
+Entering med(5,5)...
+	Pre-computed: Returning with value: 2
+For (4,5) comparing: 143
+Map entries are: 
+map[4,5]= 3
+map[5,5]= 2
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (4,5)= 3
+Entering med(5,4)...
+Entering med(6,5)...
+	Pre-computed: Returning with value: 1
+Entering med(5,5)...
+	Pre-computed: Returning with value: 2
+Entering med(6,4)...
+Entering med(7,5)...
+	Pre-computed: Returning with value: 0
+For (6,4) comparing: 014
+Map entries are: 
+map[4,5]= 3
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (6,4)= 0
+For (5,4) comparing: 141
+Map entries are: 
+map[4,5]= 3
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (5,4)= 1
+For (4,4) comparing: 142
+Map entries are: 
+map[4,4]= 2
+map[4,5]= 3
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (4,4)= 2
+Entering med(3,4)...
+Entering med(4,5)...
+	Pre-computed: Returning with value: 3
+Entering med(3,5)...
+Entering med(4,6)...
+	MaxIndex: Returning with delete cost from A: 4
+Entering med(3,6)...
+	MaxIndex: Returning with delete cost from A: 5
+Entering med(4,5)...
+	Pre-computed: Returning with value: 3
+For (3,5) comparing: 144
+Map entries are: 
+map[3,5]= 4
+map[4,4]= 2
+map[4,5]= 3
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (3,5)= 4
+Entering med(4,4)...
+	Pre-computed: Returning with value: 2
+For (3,4) comparing: 143
+Map entries are: 
+map[3,4]= 3
+map[3,5]= 4
+map[4,4]= 2
+map[4,5]= 3
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (3,4)= 3
+Entering med(4,3)...
+Entering med(5,4)...
+	Pre-computed: Returning with value: 1
+Entering med(4,4)...
+	Pre-computed: Returning with value: 2
+Entering med(5,3)...
+Entering med(6,4)...
+	Pre-computed: Returning with value: 0
+For (5,3) comparing: 014
+Map entries are: 
+map[3,4]= 3
+map[3,5]= 4
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (5,3)= 0
+For (4,3) comparing: 141
+Map entries are: 
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (4,3)= 1
+For (3,3) comparing: 142
+Map entries are: 
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (3,3)= 2
+Entering med(2,3)...
+Entering med(3,4)...
+	Pre-computed: Returning with value: 3
+Entering med(2,4)...
+Entering med(3,5)...
+	Pre-computed: Returning with value: 4
+Entering med(2,5)...
+Entering med(3,6)...
+	MaxIndex: Returning with delete cost from A: 5
+Entering med(2,6)...
+	MaxIndex: Returning with delete cost from A: 6
+Entering med(3,5)...
+	Pre-computed: Returning with value: 4
+For (2,5) comparing: 145
+Map entries are: 
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (2,5)= 5
+Entering med(3,4)...
+	Pre-computed: Returning with value: 3
+For (2,4) comparing: 144
+Map entries are: 
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (2,4)= 4
+Entering med(3,3)...
+	Pre-computed: Returning with value: 2
+For (2,3) comparing: 143
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,5]= 0
+	Returning after new Map entry (2,3)= 3
+Entering med(3,2)...
+Entering med(4,3)...
+	Pre-computed: Returning with value: 1
+Entering med(3,3)...
+	Pre-computed: Returning with value: 2
+Entering med(4,2)...
+Entering med(5,3)...
+	Pre-computed: Returning with value: 0
+Entering med(4,3)...
+	Pre-computed: Returning with value: 1
+Entering med(5,2)...
+Entering med(6,3)...
+Entering med(7,4)...
+Entering med(8,5)...
+	MaxIndex: Returning with insert cost from B to A: 1
+Entering med(7,5)...
+	Pre-computed: Returning with value: 0
+Entering med(8,4)...
+	MaxIndex: Returning with insert cost from B to A: 2
+For (7,4) comparing: 141
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (7,4)= 1
+Entering med(6,4)...
+	Pre-computed: Returning with value: 0
+Entering med(7,3)...
+Entering med(8,4)...
+	MaxIndex: Returning with insert cost from B to A: 2
+Entering med(7,4)...
+	Pre-computed: Returning with value: 1
+Entering med(8,3)...
+	MaxIndex: Returning with insert cost from B to A: 3
+For (7,3) comparing: 142
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,4]= 0
+map[6,5]= 1
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (7,3)= 2
+For (6,3) comparing: 141
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (6,3)= 1
+Entering med(5,3)...
+	Pre-computed: Returning with value: 0
+Entering med(6,2)...
+Entering med(7,3)...
+	Pre-computed: Returning with value: 2
+Entering med(6,3)...
+	Pre-computed: Returning with value: 1
+Entering med(7,2)...
+Entering med(8,3)...
+	MaxIndex: Returning with insert cost from B to A: 3
+Entering med(7,3)...
+	Pre-computed: Returning with value: 2
+Entering med(8,2)...
+	MaxIndex: Returning with insert cost from B to A: 4
+For (7,2) comparing: 143
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (7,2)= 3
+For (6,2) comparing: 142
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (6,2)= 2
+For (5,2) comparing: 141
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (5,2)= 1
+For (4,2) comparing: 141
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (4,2)= 1
+For (3,2) comparing: 142
+Map entries are: 
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (3,2)= 2
+For (2,2) comparing: 143
+Map entries are: 
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (2,2)= 3
+Entering med(1,2)...
+Entering med(2,3)...
+	Pre-computed: Returning with value: 3
+Entering med(1,3)...
+Entering med(2,4)...
+	Pre-computed: Returning with value: 4
+Entering med(1,4)...
+Entering med(2,5)...
+	Pre-computed: Returning with value: 5
+For (1,4) comparing: 514
+Map entries are: 
+map[1,4]= 5
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (1,4)= 5
+Entering med(2,3)...
+	Pre-computed: Returning with value: 3
+For (1,3) comparing: 144
+Map entries are: 
+map[1,3]= 4
+map[1,4]= 5
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (1,3)= 4
+Entering med(2,2)...
+	Pre-computed: Returning with value: 3
+For (1,2) comparing: 144
+Map entries are: 
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (1,2)= 4
+Entering med(2,1)...
+Entering med(3,2)...
+	Pre-computed: Returning with value: 2
+Entering med(2,2)...
+	Pre-computed: Returning with value: 3
+Entering med(3,1)...
+Entering med(4,2)...
+	Pre-computed: Returning with value: 1
+For (3,1) comparing: 114
+Map entries are: 
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (3,1)= 1
+For (2,1) comparing: 142
+Map entries are: 
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (2,1)= 2
+For (1,1) comparing: 143
+Map entries are: 
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (1,1)= 3
+Entering med(0,1)...
+Entering med(1,2)...
+	Pre-computed: Returning with value: 4
+Entering med(0,2)...
+Entering med(1,3)...
+	Pre-computed: Returning with value: 4
+Entering med(0,3)...
+Entering med(1,4)...
+	Pre-computed: Returning with value: 5
+Entering med(0,4)...
+Entering med(1,5)...
+Entering med(2,6)...
+	MaxIndex: Returning with delete cost from A: 6
+Entering med(1,6)...
+	MaxIndex: Returning with delete cost from A: 7
+Entering med(2,5)...
+	Pre-computed: Returning with value: 5
+For (1,5) comparing: 146
+Map entries are: 
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (1,5)= 6
+Entering med(0,5)...
+Entering med(1,6)...
+	MaxIndex: Returning with delete cost from A: 7
+Entering med(0,6)...
+	MaxIndex: Returning with delete cost from A: 8
+Entering med(1,5)...
+	Pre-computed: Returning with value: 6
+For (0,5) comparing: 147
+Map entries are: 
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (0,5)= 7
+Entering med(1,4)...
+	Pre-computed: Returning with value: 5
+For (0,4) comparing: 146
+Map entries are: 
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (0,4)= 6
+Entering med(1,3)...
+	Pre-computed: Returning with value: 4
+For (0,3) comparing: 145
+Map entries are: 
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (0,3)= 5
+Entering med(1,2)...
+	Pre-computed: Returning with value: 4
+For (0,2) comparing: 145
+Map entries are: 
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (0,2)= 5
+Entering med(1,1)...
+	Pre-computed: Returning with value: 3
+For (0,1) comparing: 144
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (0,1)= 4
+Entering med(1,0)...
+Entering med(2,1)...
+	Pre-computed: Returning with value: 2
+Entering med(1,1)...
+	Pre-computed: Returning with value: 3
+Entering med(2,0)...
+Entering med(3,1)...
+	Pre-computed: Returning with value: 1
+Entering med(2,1)...
+	Pre-computed: Returning with value: 2
+Entering med(3,0)...
+Entering med(4,1)...
+Entering med(5,2)...
+	Pre-computed: Returning with value: 1
+Entering med(4,2)...
+	Pre-computed: Returning with value: 1
+Entering med(5,1)...
+Entering med(6,2)...
+	Pre-computed: Returning with value: 2
+Entering med(5,2)...
+	Pre-computed: Returning with value: 1
+Entering med(6,1)...
+Entering med(7,2)...
+	Pre-computed: Returning with value: 3
+Entering med(6,2)...
+	Pre-computed: Returning with value: 2
+Entering med(7,1)...
+Entering med(8,2)...
+	MaxIndex: Returning with insert cost from B to A: 4
+Entering med(7,2)...
+	Pre-computed: Returning with value: 3
+Entering med(8,1)...
+	MaxIndex: Returning with insert cost from B to A: 5
+For (7,1) comparing: 144
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (7,1)= 4
+For (6,1) comparing: 143
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (6,1)= 3
+For (5,1) comparing: 142
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (5,1)= 2
+For (4,1) comparing: 142
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (4,1)= 2
+Entering med(3,1)...
+	Pre-computed: Returning with value: 1
+Entering med(4,0)...
+Entering med(5,1)...
+	Pre-computed: Returning with value: 2
+Entering med(4,1)...
+	Pre-computed: Returning with value: 2
+Entering med(5,0)...
+Entering med(6,1)...
+	Pre-computed: Returning with value: 3
+Entering med(5,1)...
+	Pre-computed: Returning with value: 2
+Entering med(6,0)...
+Entering med(7,1)...
+	Pre-computed: Returning with value: 4
+Entering med(6,1)...
+	Pre-computed: Returning with value: 3
+Entering med(7,0)...
+Entering med(8,1)...
+	MaxIndex: Returning with insert cost from B to A: 5
+Entering med(7,1)...
+	Pre-computed: Returning with value: 4
+Entering med(8,0)...
+	MaxIndex: Returning with insert cost from B to A: 6
+For (7,0) comparing: 145
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (7,0)= 5
+For (6,0) comparing: 144
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,0]= 4
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (6,0)= 4
+For (5,0) comparing: 143
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,0]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,0]= 4
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (5,0)= 3
+For (4,0) comparing: 143
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,0]= 3
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,0]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,0]= 4
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (4,0)= 3
+For (3,0) comparing: 142
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,0]= 2
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,0]= 3
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,0]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,0]= 4
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (3,0)= 2
+For (2,0) comparing: 142
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,0]= 2
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,0]= 2
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,0]= 3
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,0]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,0]= 4
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (2,0)= 2
+For (1,0) comparing: 143
+Map entries are: 
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,0]= 3
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,0]= 2
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,0]= 2
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,0]= 3
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,0]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,0]= 4
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (1,0)= 3
+For (0,0) comparing: 144
+Map entries are: 
+map[0,0]= 4
+map[0,1]= 4
+map[0,2]= 5
+map[0,3]= 5
+map[0,4]= 6
+map[0,5]= 7
+map[1,0]= 3
+map[1,1]= 3
+map[1,2]= 4
+map[1,3]= 4
+map[1,4]= 5
+map[1,5]= 6
+map[2,0]= 2
+map[2,1]= 2
+map[2,2]= 3
+map[2,3]= 3
+map[2,4]= 4
+map[2,5]= 5
+map[3,0]= 2
+map[3,1]= 1
+map[3,2]= 2
+map[3,3]= 2
+map[3,4]= 3
+map[3,5]= 4
+map[4,0]= 3
+map[4,1]= 2
+map[4,2]= 1
+map[4,3]= 1
+map[4,4]= 2
+map[4,5]= 3
+map[5,0]= 3
+map[5,1]= 2
+map[5,2]= 1
+map[5,3]= 0
+map[5,4]= 1
+map[5,5]= 2
+map[6,0]= 4
+map[6,1]= 3
+map[6,2]= 2
+map[6,3]= 1
+map[6,4]= 0
+map[6,5]= 1
+map[7,0]= 5
+map[7,1]= 4
+map[7,2]= 3
+map[7,3]= 2
+map[7,4]= 1
+map[7,5]= 0
+	Returning after new Map entry (0,0)= 4
+Minimum edit distance for converting saturday to Sunday is: 4
