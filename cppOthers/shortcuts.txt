@@ -1,0 +1,42 @@
+vim Shortcuts:
+	search tricks:
+		set ic: ignore case
+		set nu: line number
+		syntax on: syntax highlighting
+		se hlsyntax: syntax highlighting
+		
+	search keyword:
+		/keyword in command mode
+		* to search the selected word
+		n to go to next occurance
+		N to go to prev occurence
+	
+	Traversal within file:
+		gg: go beginning
+		G: go end of file.
+		%: find matching bracket
+
+	
+	vimDiff:
+		ctrl+ww: change windows
+		dp: put diff from present column to opposite
+		do: obtain diff from other column to present
+		close all: :wa
+		Undo changes: Esc + u
+
+
+MobaXterm shortcuts:
+	Stop terminal termination
+		check nohup command
+		
+Search a file:
+	locate filename
+		
+Git password save:
+	git config --global credential.helper cache store
+	
+Git local credentials:
+	git config --local user.name "Debabrota Sadhukhan"; git config --local user.email "dsadhukh@radisys.com"
+	
+Source Commands:
+	source /root/Confd/confd-7.6/confdrc
