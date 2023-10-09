@@ -1,12 +1,18 @@
 #include<iostream>
 using namespace std;
 
+// This algorithm runs in O(log (exponent)) time.
+// Idea is to use the idea a^10 = a^5*a^5 and a^11 = a^5*a^5*a. 
+// Distinguish even and odd cases and use recursion for sub-powers
+
 unsigned long long fastExponentiation (int base, int exponent){
-    if(exponent==1) return base;
+    if(exponent ==0) return 1;
+    if(exponent ==1) return base;
     cout << "Exponent: " << exponent << endl;
 
 /*
-int res=1;
+    // Long code
+    int res=1;
     if(exponent&1 ==0){
         // Exponent is even number
         res = fastExponentiation(base, exponent/2) * fastExponentiation(base, exponent/2);
@@ -16,9 +22,10 @@ int res=1;
     }
 
 */
+    // Short code, see above commented code for explanation.
     auto res = fastExponentiation(base, exponent/2);
-    res *= res;
-    if(exponent&1) res*= base;
+    res *= res; //computes square
+    if(exponent&1) res*= base; // computes square *base
 
     return res;
 }
