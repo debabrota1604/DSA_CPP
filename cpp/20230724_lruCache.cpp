@@ -10,8 +10,8 @@ struct Node{
 
 template<typename T>
 class LruCache{
-    Node *head, *tail;
-    unordered_map<T, Node *> cache;
+    Node *head, *tail; // For updating data
+    unordered_map<T, Node *> cache; //for O(1) lookup
     int cacheSize;
 
     void moveToTail(Node *keyNode){

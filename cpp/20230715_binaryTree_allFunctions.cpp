@@ -217,7 +217,7 @@ class Tree{
         deque<pair<int, int>> q;
         recursiveMark_topView(q, head, 0);
         
-        // Step3: Traverse the array and check if it's index is outside the queue marks or not. If not, isert it in front or rear of queue.
+        // Step3: Traverse the array and check if it's index is outside the queue marks or not. If not, insert it in front or rear of queue.
         
         // Step4: Once whole tree is traversed, print the queue. 
         while(!q.empty()){

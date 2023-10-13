@@ -14,6 +14,9 @@ public:
     virtual void draw() const {
         std::cout << "Drawing a shape." << std::endl;
     }
+    virtual void diamondProblem(){
+        std::cout<< "diamondProblem: In Shape class" << std::endl;
+    }
 };
 
 // Base class 2
@@ -24,8 +27,16 @@ public:
     }
 };
 
+// Test which verison will be executed.
+class ShapeCopy{
+    public:
+    virtual void diamondProblem(){
+        std::cout << "diamondProblem: In ShapeCopy" << std::endl;
+    }
+};
+
 // Derived class with multiple inheritance
-class ColoredShape : public Shape, public Color {
+class ColoredShape : public Shape, public Color, public ShapeCopy {
 public:
     void draw() const override {
         std::cout << "Drawing a colored shape." << std::endl;
@@ -37,6 +48,7 @@ int main() {
 
     coloredShape.draw(); // Calls the overridden draw() function in ColoredShape
     coloredShape.fill(); // Calls the fill() function from the Color base class
+    //coloredShape.diamondProblem(); // Throws compilation error
 
     return 0;
 }

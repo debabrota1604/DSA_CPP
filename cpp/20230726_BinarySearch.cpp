@@ -17,6 +17,7 @@ int binarySearch(vector<int> inp, int key){
     return -1;
 }
 
+// Recursive & overloaded
 int binarySearch(vector<int> inp, int key, int lo, int hi){
     int mid = lo + (hi-lo)/2;
     if(lo > hi) return -1;
@@ -31,7 +32,7 @@ int firstOccurence(vector<int> inp, int key){
     while(lo <= hi){
         mid = lo + (hi-lo)/2;
         if(key == inp[mid]){
-            res = mid;f
+            res = mid;
             hi = mid-1; // Search again for the previous key in the array
         }
         else if(key < inp[mid]) hi = mid -1;

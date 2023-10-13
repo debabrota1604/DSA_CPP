@@ -68,3 +68,21 @@ The DeepCopyExample class, however, implements a deep copy. When deepObj1 is cop
 
 Remember that if your class contains complex data structures or pointers to dynamically allocated memory, you need to define appropriate copy constructors and destructor or consider using the Rule of Three (or Rule of Five in C++11 and later) to ensure proper behavior when performing copy operations.
 */
+
+
+/*
+A default copy constrcutor is supplied by the C++ compiler whenever there's a missing user-defined copy constructor. 
+The default copy constructor will copy each attribute of the class as-is (this is refered to as shallow copy). Which means, both obj1.data and obj2.data point to the same integer memory.
+
+Problems with the default copy constructor (compiler provided - shallow copy):
+1. Modification to one object is visible to the other object, which might not be desired.
+2. While maintaining RAII principles, the destructors will create a problem. 
+    The first object to be destroyed will be successfully destroyed, 
+    but the second time when the destructor is called, there will be no valid memory reference (already freed by first destructor call to the other object).
+
+For more info:
+https://www.codementor.io/@sandesh87/the-rule-of-five-in-c-1pdgpzb04f
+https://en.cppreference.com/w/cpp/language/raii
+https://stackoverflow.com/questions/3106110/what-is-move-semantics
+
+*/

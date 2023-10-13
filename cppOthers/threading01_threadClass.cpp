@@ -11,7 +11,8 @@ void threadFunction() {
 
 int main() {
     std::thread myThread(threadFunction);
-    myThread.join(); // Wait for the thread to finish
+    myThread.join(); // Wait for the thread to finish̉̉
 
     return 0;
 }
+̉̉

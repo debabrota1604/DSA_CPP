@@ -1,7 +1,4 @@
-In C++, memory management is crucial in non-garbage collected environments, where the responsibility 
-for memory allocation and deallocation lies with the programmer. Failing to manage memory properly 
-can lead to memory leaks, resource exhaustion, and undefined behavior. Here are some key memory 
-management techniques used in non-garbage collected environments:
+In C++, memory management is crucial in non-garbage collected environments, where the responsibility for memory allocation and deallocation lies with the programmer. Failing to manage memory properly can lead to memory leaks, resource exhaustion, and undefined behavior. Here are some key memory management techniques used in non-garbage collected environments:
 
 1. Manual Memory Allocation (new and delete): In C++, you can manually allocate memory for objects using the new operator and deallocate it using the delete operator. It is essential to ensure that every object allocated with new is eventually deallocated with delete to avoid memory leaks.
     Example:

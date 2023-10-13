@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 /*
 Constructor delegation in C++ allows one constructor of a class to call another constructor in the same class. This feature is helpful when you want to avoid code duplication in multiple constructors by having one constructor initialize common members and then delegate to other constructors for additional, specific initialization.
@@ -65,7 +66,7 @@ private:
     std::string name_;
 };
 
-int main() {
+void notConstructorDeligation() {
     // Using Constructor 1: Default Constructor
     MyClass obj1;
     obj1.Display();
@@ -79,8 +80,30 @@ int main() {
     // Using Constructor 3: Constructor with a single parameter
     MyClass obj3(2);
     obj3.Display();
+}
 
-    return 0;
+void withConstructorDeligation() {
+    // Using Constructor 1: Default Constructor
+    MyClass_CD obj1;
+    obj1.Display();
+    std::cout << std::endl;
+
+    // Using Constructor 2: Constructor with Parameters
+    MyClass obj2(1, "Alice");
+    obj2.Display();
+    std::cout << std::endl;
+
+    // Using Constructor 3: Constructor with a single parameter
+    MyClass obj3(2);
+    obj3.Display();
+}
+
+int main(){
+    cout << "Result without constructor deligation: " << endl;
+    notConstructorDeligation();
+
+    cout << "\n\nResult with constructor deligation: " << endl;
+    withConstructorDeligation();
 }
 
 

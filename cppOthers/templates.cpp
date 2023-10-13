@@ -1,13 +1,8 @@
 /*
-Templating in C++ allows you to write generic code that can work with multiple data types without having 
-to rewrite the same logic for each data type. Templates enable you to define functions, classes, and 
-even variables that can accept data types as parameters. This feature is known as "generic programming" 
-and is one of the powerful aspects of C++. There are two main types of templates in C++:
+Templating in C++ allows you to write generic code that can work with multiple data types without having to rewrite the same logic for each data type. Templates enable you to define functions, classes, and  even variables that can accept data types as parameters. This feature is known as "generic programming"  and is one of the powerful aspects of C++. There are two main types of templates in C++:
 
 1. Function Templates:
-Function templates allow you to define functions that can work with different data types. The syntax for 
-function templates uses the template keyword followed by the template parameter(s) enclosed in angle brackets (<>). 
-The template parameter(s) represent the generic data type(s) that the function can work with.
+Function templates allow you to define functions that can work with different data types. The syntax for  function templates uses the template keyword followed by the template parameter(s) enclosed in angle brackets (<>).  The template parameter(s) represent the generic data type(s) that the function can work with.
 */
 
 #include <iostream>

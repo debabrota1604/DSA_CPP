@@ -1,8 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Given a knapsack weight capacity of K and an array of weights W with corresponding values V, 
-// compute the maximum value of knapsack possible with maximum weight upto K.
+// Given a knapsack weight capacity of K and an array of weights W with corresponding values V, compute the maximum value of knapsack possible with maximum weight upto K.
 
 class Knapsack{
     int maxWeight;

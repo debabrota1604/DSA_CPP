@@ -1,8 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-//given two strings str1 and str2 anf three operations insert, delete & replace with their respective
-//weights, compute the minimum weight to transform str1 into str2;
+//given two strings str1 and str2 anf three operations insert, delete & replace with their respective weights, compute the minimum weight to transform str1 into str2;
 
 
 class EditDistance{
