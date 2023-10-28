@@ -47,6 +47,8 @@ class Solution {
 public:
     int minChanges(string s) {
         int res=0;
+
+        // for each pair of indices check for mismatch and return
         for(int iter=0; iter< s.size(); iter+=2){
             if((s[iter]-'0') ^ (s[iter+1] -'0')) res++;
         }
