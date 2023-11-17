@@ -113,7 +113,7 @@ void danglingPointerExample1(){
 
 // EXAMPLE 2 
 void danglingPointerExample2(){
-    int* ptr = NULL 
+    int* ptr = NULL ;
     { 
         int x = 10; 
         ptr = &x; 
@@ -319,14 +319,18 @@ Volatile keyword is used to prevent the compiler from optimization because their
 The volatile keyword is intended to prevent the compiler from applying any optimizations on objects that can change in ways that cannot be determined by the compiler. 
 Objects declared as volatile are omitted from optimization because their values can be changed by code outside the scope of current code at any time. 
 
+The proper use of volatile specifier is when an external io register is memory mapped that can change independently from the current code, hence should not cache it. Another use can be when the same variable is shared by multiple threads, then also it should not be cached, as other thread can change the value in memory invalidating the cache value.
+
 More info : https://www.geeksforgeeks.org/understanding-volatile-qualifier-in-c/
 */
 
 /*
 Can a variable be both const and volatile? 
 yes, the const means that the variable cannot be assigned a new value. The value can be changed by other code or pointer. For example the following program works fine. 
+ This combination is rare but can be useful in certain situations where you want to indicate that a value is read-only and should not be modified by the code, but it can change at any time due to external factors.
 */
 
+// Example 1
 void volativeConstCheck()
 {
     const volatile int local = 10;
@@ -334,6 +338,15 @@ void volativeConstCheck()
     printf("Initial value of local : %d \n", local);
     *ptr = 100;
     printf("Modified value of local: %d \n", local);
+}
+
+
+// Example 2
+const volatile int* hardwareStatus = (const volatile int*)0x1000;  // Memory-mapped hardware status register
+int readRegister() {
+    int status = *hardwareStatus;  // Read the hardware status
+    // ...
+    return 0;
 }
 
 

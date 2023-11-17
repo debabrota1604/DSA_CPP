@@ -72,6 +72,17 @@ int main() {
     }
     std::cout << std::endl;
 
+    /*
+    Output:
+    Value Capture: x = 10, a = 100
+    Reference Capture: y = 84, b = 200
+    After Lambdas: x = 42, y = 85
+    Sum after lambda calls: 35
+    Before lambda: i = 10
+    After lambda: i = 20
+    Squared values: 1 4 9 16 25 
+    */
+
 
     return 0;
 }

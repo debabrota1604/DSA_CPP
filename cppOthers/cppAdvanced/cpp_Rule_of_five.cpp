@@ -48,7 +48,7 @@ public:
 
 
 /*
-In Example 1, we have a class Student that manually manages a dynamically allocated resouces, viz. name. The 1-arg constructor allocates memory for name and the destructor frees the allocated memory. This avoids memory leaks.
+In Example 1, we have a class Student that manually manages a dynamically allocated resources, viz. name. The 1-arg constructor allocates memory for name and the destructor frees the allocated memory. This avoids memory leaks.
 
 But what happens when an object of Student is copied?
 */
@@ -131,7 +131,7 @@ Student s2 = s1;
 /*
 there's no memory leak. When s2 is created, a copy of the name C-string is created in memory. s1 and s2 no longer share the same C-string.
 
-The implementation of the copy assignment is a bit more invovled as compared to the copy constructor. In the copy assignment, we also have to account for self-assignment and freeing up of old memory.
+The implementation of the copy assignment is a bit more involved as compared to the copy constructor. In the copy assignment, we also have to account for self-assignment and freeing up of old memory.
 */
 
 /*
@@ -144,7 +144,7 @@ The Rule of Five is a modern extension to the Rule of Three. The Rule of Five st
             4. move constructor
             5. move assignment
 
-In addition to copy semantics (Rule of Three), we also have to implement move semantics. Move operations are efficient as compared to copy aperations as they make use of the already allocated memory and avoid unnecessary copy operations.
+In addition to copy semantics (Rule of Three), we also have to implement move semantics. Move operations are efficient as compared to copy operations as they make use of the already allocated memory and avoid unnecessary copy operations.
 
 Not implementing move semantics is not usually considered an error. If move semantics are missing, the compiler would normally use the less efficient copy operations wherever possible. If a class does not require move operations, we can easily skip those. But, implementing them results in increased efficiency.
 

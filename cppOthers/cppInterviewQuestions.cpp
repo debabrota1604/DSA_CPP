@@ -51,7 +51,7 @@ Important points about friend functions and classes:
 Function overloading VS Operator Overloading:
 Function overloading is a feature in C++ where two or more functions can have the same name but different type of parameters and  different number of parameters. 
 Note: Overloading of functions with different return types are not allowed. 
-Operating overloading allows us to make operators work for user-defined classes. For example, we can overload an operator ‘+’ in a class like String so that we can concatenate two strings by just using +. 
+Operator overloading allows us to make operators work for user-defined classes. For example, we can overload an operator ‘+’ in a class like String so that we can concatenate two strings by just using +. 
 Other example classes where arithmetic operators may be overloaded are Complex Number, Fractional Number, Big Integer, etc. 
 
 

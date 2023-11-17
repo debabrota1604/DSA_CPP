@@ -102,9 +102,36 @@ int main(){
     cout << "Result without constructor deligation: " << endl;
     notConstructorDeligation();
 
+    /*
+    Result without constructor deligation: 
+    Default Constructor Called
+    ID: 0, Name: Default
+
+    Parameterized Constructor Called
+    ID: 1, Name: Alice
+
+    Constructor with ID Called
+    ID: 2, Name: Unnamed
+    */
+
     cout << "\n\nResult with constructor deligation: " << endl;
     withConstructorDeligation();
+
+    /*
+    Result with constructor deligation: 
+    Parameterized Constructor Called
+    Default Constructor Called
+    ID: 0, Name: Default
+
+    Parameterized Constructor Called
+    ID: 1, Name: Alice
+
+    Constructor with ID Called
+    ID: 2, Name: Unnamed
+    */
 }
+
+
 
 
 /*
