@@ -1,0 +1,26 @@
+C++11, also known as C++0x, was a significant update to the C++ language, bringing numerous new features and improvements. Some of the key features introduced in C++11 include:
+
+    1. Auto Type Deduction: The auto keyword allows the compiler to deduce the type of a variable based on its initializer.
+
+    2. Lambda Expressions: Lambda expressions enable inline function definitions, allowing you to create small, anonymous functions within the code.
+
+    3. Range-based for Loop: A simplified loop that iterates over elements of a range (e.g., arrays, containers) without the need for explicit iterators.
+
+    4. Move Semantics: Introduced rvalue references (&&) and move constructors/assignment operators to enable more efficient transfer of resources between objects.
+
+    5. Smart Pointers: Three smart pointer types: std::unique_ptr, std::shared_ptr, and std::weak_ptr, to provide better memory management and avoid memory leaks.
+
+    6. Uniform Initialization: A more consistent syntax for initializing objects using braces {}.
+
+    7. Standard Thread Library: A new library for working with threads, allowing developers to create and manage threads in a more standardized way.
+
+    8. std::function and std::bind: Support for function objects and function binding, enhancing code flexibility.
+
+    9. Variadic Templates: Templates that accept a variable number of arguments, enabling more flexible template-based programming.
+
+    10. nullptr: A new keyword to represent null pointers in a type-safe manner.
+
+    11. New Standard Library Features: Various new functions and containers added to the standard library, including std::unordered_map, std::unordered_set, and more.
+
+
+C++11 brought many enhancements and modernized the language significantly, making it easier to write more efficient, expressive, and maintainable code.  However, it's important to note that C++ has continued to evolve since C++11, with additional standards like C++14, C++17, and C++20, each introducing further improvements and new features to the language and standard library. Therefore, it's recommended to stay up-to-date with the latest standards for the most recent features and best practices in C++.

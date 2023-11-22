@@ -75,3 +75,22 @@ However, it's essential to consider some limitations and caveats when using atom
 
 In summary, atomic variables offer a performance advantage, simpler code structure, and avoidance of deadlocks compared to traditional synchronization mechanisms. However, they are most effective for simple, fine-grained operations with minimal data dependencies among threads. For more complex interactions and data sharing, traditional synchronization mechanisms like mutexes and semaphores might be more appropriate.
 */
+
+
+/*
+Limitations of std::atomic:
+
+    1. Limited Operations: std::atomic supports a limited set of atomic operations. Not all operations that might be considered atomic are provided. For example, complex operations involving multiple variables may require the use of locks.
+
+    2. Performance Implications: Depending on the specific implementation and hardware architecture, using atomic operations might have performance implications. Atomic operations may involve memory barriers or other low-level mechanisms that can impact performance, especially in heavily contended scenarios.
+
+    3. Memory Usage: Atomic operations may use additional memory or padding to ensure proper alignment and atomicity. This additional memory usage might be a concern in situations where memory usage needs to be minimized.
+
+    4. Platform Dependence: The behavior of atomic operations can be platform-dependent. Different architectures may have different characteristics regarding atomic operations and memory consistency.
+
+    5. Complexity: Working with atomic operations requires careful consideration of correctness and synchronization. Incorrect usage can lead to subtle and hard-to-debug issues such as data races or unexpected behavior.
+
+    6. Limited Support for Non-Trivial Types: std::atomic is primarily designed for fundamental types. Using it with non-trivially copyable types or types with complex constructors/destructors may lead to unexpected behavior.
+
+    7. No Support for User-Defined Atomic Types (Pre-C++20): Prior to C++20, std::atomic only supported a limited set of fundamental types. C++20 introduced the concept of atomic smart pointers, but more complex user-defined atomic types might still require additional synchronization mechanisms.
+*/

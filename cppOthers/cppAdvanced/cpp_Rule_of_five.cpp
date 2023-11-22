@@ -48,7 +48,7 @@ public:
 
 
 /*
-In Example 1, we have a class Student that manually manages a dynamically allocated resources, viz. name. The 1-arg constructor allocates memory for name and the destructor frees the allocated memory. This avoids memory leaks.
+In Example 1, we have a class Student that manually manages a dynamically allocated resources, viz. name. The 2-arg constructor allocates memory for name and the destructor frees the allocated memory. This avoids memory leaks.
 
 But what happens when an object of Student is copied?
 */
@@ -59,7 +59,7 @@ Student s2 = s1;
 /*
 When s2 is being constructed, the default copy constructor for Student will be executed (as there's no user-defined copy constructor). A default copy constructor is supplied by the C++ compiler whenever there's a missing user-defined copy constructor. (Note: The rules are a bit more involved, but let's oversimplify things a bit here). The default copy constructor will copy each attribute of the class as-is (this is referred to as shallow copy). Which means, both s1.name and s2.name point to the same C-string.
 
-What happens when main ends? s2's destructor will be called, which will free the memory allocated for name C-string. Then, s1's destructor gets called which will again try freeing the memory for the name C-string. But it's already freed! This results in undefined behaviour.
+What happens when the scope ends? s2's destructor will be called, which will free the memory allocated for name C-string. Then, s1's destructor gets called which will again try freeing the memory for the name C-string. But it's already freed! This results in undefined behaviour.
 
 To avoid this, suitable copy operations need to be provided. So now we add copy constructor and copy assignment functions to the Student class.
 */
@@ -92,7 +92,7 @@ Student& operator=(const Student& rhs) {
 }
 
 /*
-Update 1: The above version of the copy assignment is not exception safe. In the event the new call throws an exception your object is left in a broken state: it holds a pointer this->name to freed memory.
+Update 1: The above version of the copy assignment is not exception safe. In the event the new call throws an exception, your object is left in a broken state: it holds a pointer this->name to freed memory.
         When your (failed) assigned-to object goes out of scope its destructor causes a double-delete.
         If you recover in a catch block, trying to dereference this->name gives garbage or segfault if that memory was return to OS.
         Fix is simple: allocate the new memory and assign to a temp variable before deleting your member.
@@ -195,7 +195,7 @@ s6 = std::move(s5); //move assignment
 
 
 /*
-Using the std::move library function, we can force move semantics (provided the resouce supports move operations).
+Using the std::move library function, we can force move semantics (provided the resource supports move operations).
 
 Another example of move semantics is where a function returns an object by value.
 */
