@@ -29,7 +29,8 @@ public:
 
 int main() {
     MyObject obj1;
-    MyObject obj2 = std::move(obj1); // Using move constructor with std::move
+    MyObject obj2 = obj1; // Using copy constructor
+    MyObject obj3 = std::move(obj1); // Using move constructor with std::move
 
     return 0;
 }

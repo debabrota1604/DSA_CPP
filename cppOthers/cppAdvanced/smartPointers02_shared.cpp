@@ -1,14 +1,38 @@
-#include <memory>
 
 /*
-std::shared_ptr: This smart pointer represents shared ownership 
-of an object. Multiple std::shared_ptr instances can point to the same object.
-The object is deleted only when the last std::shared_ptr that owns it is destructed or reset.
+std::shared_ptr: This smart pointer represents shared ownership of an object. Multiple std::shared_ptr instances can point to the same object. The object is deleted only when the last std::shared_ptr that owns it is destructed or reset.
 */
 
-int main() {
-    std::shared_ptr<int> ptr1 = std::make_shared<int>(42);
-    std::shared_ptr<int> ptr2 = ptr1; // Both ptr1 and ptr2 share ownership of the same integer
+#include <iostream>
+#include <memory>
 
+class MyClass {
+public:
+    MyClass() {
+        std::cout << "MyClass Constructor\n";
+    }
+
+    ~MyClass() {
+        std::cout << "MyClass Destructor\n";
+    }
+
+    void SomeFunction() {
+        std::cout << "SomeFunction called\n";
+    }
+};
+
+int main() {
+    // Using shared_ptr
+    std::shared_ptr<MyClass> sharedPtr1 = std::make_shared<MyClass>();
+
+    // Creating another shared_ptr pointing to the same object
+    std::shared_ptr<MyClass> sharedPtr2 = sharedPtr1;
+
+    // Accessing member function
+    sharedPtr1->SomeFunction();
+    sharedPtr2->SomeFunction();
+
+    // The memory is automatically released when the last shared_ptr pointing to the object is destroyed
     return 0;
-} // The memory is automatically deallocated when the last shared_ptr (ptr2) goes out of scope or is reset
+}
+
