@@ -71,48 +71,44 @@ public:
     void prepareReportAndDumpToFile() {
         std::cout << std::setw(10) << this->name << ":: ";
 
-        if(durationInstances.size() ==0){ 
-            std::cout << "Error: No profiler samples recorded!!!\n";
-            return;
-        }
+        /* Dump raw profiler data to file */
+        std::ofstream outfile(PROFILER_INSTANCE_DUMP_FILE + this->name + ".txt", std::ios::app);
 
-        /* dump raw profiler data to file*/
-        std::ofstream outfile;
-        outfile.open(PROFILER_INSTANCE_DUMP_FILE + this->name + ".txt", std::ios::app);
-
-        for (size_t iter = 0; iter < durationInstances.size(); iter++) {
-            outfile << durationInstances[iter] << "\n";
+        for (const auto& duration : durationInstances) {
+            outfile << duration << "\n";
         }
         std::sort(durationInstances.begin(), durationInstances.end());
 
-        //printVector(durationInstances);
-
-        cyclecount_t median_val, prcntle_90, prcntle_95, prcntle_99, prcntle_999, min_val, max_val, totalCount;
-        totalCount = durationInstances.size();
-        min_val = durationInstances.front();
-        max_val = durationInstances.back();
-
-        median_val = durationInstances[totalCount / 2];
-        prcntle_90 = durationInstances[totalCount * 90 / 100];
-        prcntle_95 = durationInstances[totalCount * 95 / 100];
-        prcntle_99 = durationInstances[totalCount * 99 / 100];
-        prcntle_999 = durationInstances[totalCount * 999 / 1000];
-
-        double mean_val = 0;
-        for (cyclecount_t iter = 0; iter < durationInstances.size(); iter++) {
-            mean_val += ((double)durationInstances[iter]) / totalCount;
+        // Calculate statistical values
+        size_t totalCount = durationInstances.size();
+        if (totalCount == 0) {
+            std::cerr << "No duration instances to report.\n";
+            return;
         }
 
-        std::cout << " Mean: " << std::setw(8) <<  std::setfill(' ') << std::dec <<  mean_val
-                  << " Median: " << std::setw(8) << median_val
-                  << " 90th: " << std::setw(8) << prcntle_90
-                  << " 95th: " << std::setw(8) << prcntle_95
-                  << " 99th: " << std::setw(8) << prcntle_99
-                  << " 99.9th: " << std::setw(8) << prcntle_999
-                  << " Min: " << std::setw(8) << min_val
-                  << " Max: " << std::setw(8) << max_val
-                  << " Count: " << totalCount
-                  << std::endl;
+        cyclecount_t min_val = durationInstances.front();
+        cyclecount_t max_val = durationInstances.back();
+        cyclecount_t median_val = durationInstances[totalCount / 2];
+        cyclecount_t prcntle_90 = durationInstances[totalCount * 90 / 100];
+        cyclecount_t prcntle_95 = durationInstances[totalCount * 95 / 100];
+        cyclecount_t prcntle_99 = durationInstances[totalCount * 99 / 100];
+        cyclecount_t prcntle_999 = durationInstances[totalCount * 999 / 1000];
+
+        double mean_val = std::accumulate(durationInstances.begin(), durationInstances.end(), 0.0) / totalCount;
+
+        // Output statistical information
+        std::cout << " Mean: " << std::dec << std::setw(8) << std::setfill(' ') << mean_val
+                << " Median: " << std::setw(8) << median_val
+                << " 90th: " << std::setw(8) << prcntle_90
+                << " 95th: " << std::setw(8) << prcntle_95
+                << " 99th: " << std::setw(8) << prcntle_99
+                << " 99.9th: " << std::setw(8) << prcntle_999
+                << " Min: " << std::setw(8) << min_val
+                << " Max: " << std::setw(8) << max_val
+                << " Count: " << totalCount
+                << std::endl;
+
+        // Output to file
         outfile << this->name << ":: "
                 << " Mean: " << int(mean_val)
                 << " Median: " << median_val
@@ -125,7 +121,7 @@ public:
                 << " Count: " << totalCount
                 << std::endl;
 
-        outfile.close(); 
+        outfile.close();
     }
 
     void prepareReportAndDumpToFile_hex() {

@@ -4,17 +4,17 @@
 
 #include "cpuProfiler.hpp"
 #include "random.hpp"
-#define MAX_OP 50
+#define MAX_OP 50000
 using namespace std;
 
 // Change these constants for AES-256
-const bool MATCH_MODE = true;
-const bool PRINT_ALL_DATA = true;
+const bool MATCH_MODE = false;
+const bool PRINT_ALL_DATA = false;
 const bool PRINT_IV = true;
 const int AES_KEY_SIZE = 32;  // 256 bits
 const int AES_IV_SIZE = 12;  // 96 bits
 const int AES_BLOCK_SIZE = 16;  // 128 bits
-const int AES_INPUT_SIZE = 34;
+const int AES_INPUT_SIZE = 300;
 const int WARM_UP_CYCLE = 0;
 
 int main() {
@@ -70,7 +70,7 @@ int main() {
             //plain = r.hexStringToByteArray("50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52", AES_INPUT_SIZE);
             //plain = r.hexStringToByteArray("50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00", AES_INPUT_SIZE);
             //plain = r.hexStringToByteArray("50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 ", AES_INPUT_SIZE);
-            plain = r.hexStringToByteArray("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00", AES_INPUT_SIZE);
+            plain = r.hexStringToByteArray("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00", AES_INPUT_SIZE);
         }
         else plain = r.getRandomStringUnsigned(AES_INPUT_SIZE);
 

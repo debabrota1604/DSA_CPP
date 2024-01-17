@@ -166,31 +166,19 @@ class AES256GCM_NoTag_partialBlockFix{
         }
     }
 
-    // This function uses any pending iv bytes that was encrypted but not used
-    void reuse_past_encryption(uint8_t* input, size_t& input_len, uint8_t* output){
-
-    }
-
     void aes_gcm_encrypt_partialBlockFix(uint8_t* plaintext, size_t plaintext_len, uint8_t* ciphertext) {
         const size_t precompute_xor_len = std::min(encObj->encIV_unusedLen, plaintext_len);
-        std::cout << "Cipher Len: " << plaintext_len << " unusedLen:  " << encObj->encIV_unusedLen << " precomputeXorLen: " << precompute_xor_len << std::endl;
-        print_aes_block_singleLine("Last encrypted_iv", encObj->encryptedIV);
-
-        // Section 1: XOR plaintext with the encrypted counter block for remaining bytes
-        if (precompute_xor_len > 0) {
-            // Load the remaining bytes from the encrypted IV
-            const __m128i encrypted_suffix = _mm_loadu_si128(reinterpret_cast<__m128i*>(&encObj->encryptedIV) + (16 - encObj->encIV_unusedLen));
-            print_aes_block_singleLine("encrypted_suffix", encrypted_suffix);
-
-            // Create an __m128i variable with the first (16 - unused bytes) of plaintext
-            const __m128i plaintext_suffix = _mm_loadu_si128(reinterpret_cast<__m128i*>(plaintext + plaintext_len - (16 - precompute_xor_len)));
-            print_aes_block_singleLine("plaintext_suffix", plaintext_suffix);
-
-            __m128i temp = _mm_xor_si128(plaintext_suffix, _mm_andnot_si128(_mm_setzero_si128(), encrypted_suffix));
-            // Store the result in the first (16 - unused bytes) of ciphertext
-            _mm_storeu_si128(reinterpret_cast<__m128i*>(ciphertext), temp);
-            print_aes_block_singleLine("post XOR block", temp);
+        const uint8_t* buffer = reinterpret_cast<const uint8_t*>(&encObj->encryptedIV);
+        //print_aes_block_singleLine("Last encrypted_iv", encObj->encryptedIV);
+        size_t iter=0, lastUsedLen = 16- encObj->encIV_unusedLen;
+        while(iter < precompute_xor_len){
+           //std::cout << "XOR index: " << std::dec << (lastUsedLen +iter) %16 << std::endl;
+            ciphertext[iter] = plaintext[iter] ^ buffer[(lastUsedLen +iter) %16];
+            iter++;
         }
+
+        // Section 3: Set aes256gcm_encryptMode_unusedEncIvLen to the remaining bytes
+        encObj->encIV_unusedLen = (16 + precompute_xor_len - plaintext_len) % 16;
 
         // Section 2: Encrypt plaintext blocks using newly encrypted iv
         for (size_t i = precompute_xor_len; i < plaintext_len; i += 16) {
@@ -202,28 +190,20 @@ class AES256GCM_NoTag_partialBlockFix{
             __m128i ciphertext_block = _mm_xor_si128(input_block, encObj->encryptedIV);
             _mm_storeu_si128((__m128i*)(ciphertext + i), ciphertext_block);
         }
-
-        // Section 3: Set aes256gcm_encryptMode_unusedEncIvLen to the remaining bytes
-        encObj->encIV_unusedLen = (16 + precompute_xor_len - plaintext_len) % 16;
     }
     
     void aes_gcm_decrypt_partialBlockFix(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
         const size_t precompute_xor_len = std::min(decObj->encIV_unusedLen, ciphertext_len);
-        
-        // Section 1: XOR plaintext with the encrypted counter block for remaining bytes
-        if (precompute_xor_len > 0) {
-            // Load the remaining bytes from the encrypted IV
-            const __m128i encrypted_suffix = _mm_loadu_si128(reinterpret_cast<__m128i*>(&decObj->encryptedIV) + (16 - decObj->encIV_unusedLen));
-
-            // Create an __m128i variable with the first (16 - unused bytes) of plaintext
-            const __m128i ciphertext_suffix = _mm_loadu_si128(reinterpret_cast<__m128i*>(ciphertext + ciphertext_len - (16 - precompute_xor_len)));
-
-            __m128i temp = _mm_xor_si128(ciphertext_suffix, _mm_andnot_si128(_mm_setzero_si128(), encrypted_suffix));
-            // Store the result in the first (16 - unused bytes) of ciphertext
-            _mm_storeu_si128(reinterpret_cast<__m128i*>(plaintext), temp);
+        const uint8_t* buffer = reinterpret_cast<const uint8_t*>(&decObj->encryptedIV);
+        size_t iter=0, lastUsedLen = 16- decObj->encIV_unusedLen;
+        while(iter < precompute_xor_len){
+            plaintext[iter] = ciphertext[iter] ^ buffer[(lastUsedLen +iter) %16];
+            iter++;
         }
+        // Section 3: Set aes256gcm_encryptMode_unusedEncIvLen to the remaining bytes
+        decObj->encIV_unusedLen = (16 + precompute_xor_len - ciphertext_len) % 16;
 
-        // Decrypt ciphertext blocks
+        // Section 2: Decrypt ciphertext blocks
         for (size_t i = precompute_xor_len; i < ciphertext_len; i += 16) {
             inc32(decObj->inputIV);
             aesEngine->encrypt(&decObj->inputIV, &decObj->encryptedIV, decObj->key_schedule); 
@@ -234,8 +214,6 @@ class AES256GCM_NoTag_partialBlockFix{
             _mm_storeu_si128((__m128i*)(plaintext + i), plaintext_block);
         }
 
-        // Section 3: Set aes256gcm_encryptMode_unusedEncIvLen to the remaining bytes
-        decObj->encIV_unusedLen = (16 + precompute_xor_len - ciphertext_len) % 16;
     }
 
 

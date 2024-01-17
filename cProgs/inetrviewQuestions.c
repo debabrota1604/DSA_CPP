@@ -100,7 +100,7 @@ The dangling pointer points to a memory that has already been freed. The storage
 */
 
 // EXAMPLE 1 
-void danglingPointerExample1(){
+void danglingPointerExample1(){ // Accessing memory after calling free()
     int* ptr = (int*)malloc(sizeof(int)); 
     //some code in between
     free(ptr); 
@@ -112,7 +112,7 @@ void danglingPointerExample1(){
 
 
 // EXAMPLE 2 
-void danglingPointerExample2(){
+void danglingPointerExample2(){ // Accessing local memory outside it's scope
     int* ptr = NULL ;
     { 
         int x = 10; 
@@ -122,7 +122,7 @@ void danglingPointerExample2(){
     // So ptr is a dangling pointer now. 
 }
 
-char* danglingPointerExample3()
+char* danglingPointerExample3() // Accessing local memory outside it's scope
 {
     char str[10];
     strcpy(str,"Hello!");
@@ -269,7 +269,7 @@ int mainFunction() //consider this as the "int main()"
 }
 /*
 The output of the above program will be -
-n fun
+In fun
 In main
 
 This pragma directive, on the other hand, is compiler-dependent. This is not supported by gcc. As a result, it will ignore the startup directive and produce no error. But the output, in that case, will be -
