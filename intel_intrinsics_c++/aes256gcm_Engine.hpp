@@ -300,36 +300,25 @@ class AES256GCM_bugOpt{
     __m128i key_schedule[15], key_schedule_decrypt[15];
 
     // Expand the IV to a 128-bit block
-    __m128i *counter_block_enc, *counter_block_dec;
-    __m128i *encrypted_counter_block_enc, *encrypted_counter_block_dec;
+    __m128i counter_block_enc, counter_block_dec;
+    __m128i encrypted_counter_block_enc, encrypted_counter_block_dec;
 
     AES256GCM_bugOpt(){
-        this->counter_block_enc = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
-        this->counter_block_dec = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
-        this->encrypted_counter_block_enc = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
-        this->encrypted_counter_block_dec = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
     }
     ~AES256GCM_bugOpt(){
-        // Free the allocated memory
-        if (this->counter_block_enc) _mm_free(this->counter_block_enc);
-        if (this->counter_block_dec) _mm_free(this->counter_block_dec);
     }
 
     void initialize(const uint8_t* key,  uint8_t* iv){
-        // load_key_256_encrypt(key_schedule, key);
-        // load_key_256_decrypt(key_schedule_decrypt, key);
-        // load_iv_96(this->counter_block_enc, iv);
-        // load_iv_96(this->counter_block_dec, iv);
         encrypt_aes256gcm_init(key, iv);
         decrypt_aes256gcm_init(key, iv);
     }
 
     void encrypt_aes256gcm_init(const uint8_t* key_encryption,  uint8_t* iv_encryption){
-        load_iv_96(counter_block_enc, iv_encryption);
+        load_iv_96(&counter_block_enc, iv_encryption);
         load_key_256_encrypt(key_schedule, key_encryption);
     }
     void decrypt_aes256gcm_init(const uint8_t* key_decryption,  uint8_t* iv_decryption){
-        load_iv_96(counter_block_dec, iv_decryption);
+        load_iv_96(&counter_block_dec, iv_decryption);
         load_key_256_encrypt(key_schedule, key_decryption);
     }
 
@@ -401,30 +390,28 @@ class AES256GCM_bugOpt{
     void aes_gcm_encrypt(uint8_t* plaintext, size_t plaintext_len, uint8_t* ciphertext) {
         // Encrypt plaintext blocks
         for (size_t i = 0; i < plaintext_len; i += 16) {
-            __m128i encrypted_counter_block;
             inc32_minimal(counter_block_enc);
-            encrypt_iv(counter_block_enc, encrypted_counter_block_enc);
+            encrypt_iv(&counter_block_enc, &encrypted_counter_block_enc);
             //encrypt_iv(&(encObj->inputIV), &(encObj->encryptedIV));
 
             // XOR plaintext with the encrypted counter block
-            _mm_storeu_si128((__m128i*)(ciphertext + i), _mm_xor_si128(_mm_loadu_si128(reinterpret_cast<__m128i*>(plaintext + i)), *encrypted_counter_block_enc));
+            _mm_storeu_si128((__m128i*)(ciphertext + i), _mm_xor_si128(_mm_loadu_si128(reinterpret_cast<__m128i*>(plaintext + i)), encrypted_counter_block_enc));
         }
     }
     void aes_gcm_decrypt(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
         // Decrypt ciphertext blocks
         for (size_t i = 0; i < ciphertext_len; i += 16) {
-            __m128i encrypted_counter_block;
             inc32_minimal(counter_block_dec);
-            encrypt_iv(counter_block_dec, encrypted_counter_block_dec); 
+            encrypt_iv(&counter_block_dec, &encrypted_counter_block_dec); 
 
             // XOR ciphertext with the encrypted counter block to obtain the plaintext
-            _mm_storeu_si128((__m128i*)(plaintext + i), _mm_xor_si128(_mm_loadu_si128(reinterpret_cast<__m128i*>(ciphertext + i)), *encrypted_counter_block_dec));
+            _mm_storeu_si128((__m128i*)(plaintext + i), _mm_xor_si128(_mm_loadu_si128(reinterpret_cast<__m128i*>(ciphertext + i)), encrypted_counter_block_dec));
         }
     }
 
-    void inc32_minimal(__m128i* memory128b){
+    void inc32_minimal(__m128i memory128b){
         __m128i SWAP_MASK = _mm_setr_epi8(0,1,2,3,4,5,6,7,8,9,10,11,15,14,13,12);
-        *memory128b = _mm_shuffle_epi8(_mm_add_epi32(_mm_shuffle_epi8(*memory128b, SWAP_MASK), _mm_setr_epi32(0,0,0,1)), SWAP_MASK); 
+        memory128b = _mm_shuffle_epi8(_mm_add_epi32(_mm_shuffle_epi8(memory128b, SWAP_MASK), _mm_setr_epi32(0,0,0,1)), SWAP_MASK); 
     }
 
     // For single block encrypt using AES
