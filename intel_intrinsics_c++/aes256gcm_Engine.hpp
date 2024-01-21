@@ -350,7 +350,7 @@ class AES256GCM_bugOpt{
     }    
     void load_key_256_encrypt(__m128i* key_schedule, const uint8_t key[32]) noexcept
 	{
-        //if(key_schedule) return; //execute key_schedule generation only once
+        if(key_schedule) return; //execute key_schedule generation only once
 		key_schedule[0] = _mm_loadu_si128(&reinterpret_cast<const __m128i*>(key)[0]);
 		key_schedule[1] = _mm_loadu_si128(&reinterpret_cast<const __m128i*>(key)[1]);
 		key_schedule[2] = aes_expand_key_evn_step(key_schedule[0], _mm_aeskeygenassist_si128(key_schedule[1], 0x01));
