@@ -399,8 +399,10 @@ class AES256GCM_bugOpt{
         // Encrypt plaintext blocks
         for (size_t i = 0; i < plaintext_len; i += 16) {
             __m128i encrypted_counter_block;
-            inc32_minimal(counter_block_enc);
-            encrypt_iv(counter_block_enc, &encrypted_counter_block);
+            // inc32_minimal(counter_block_enc);
+            inc32_minimal(&(encObj->inputIV));
+            // encrypt_iv(counter_block_enc, &encrypted_counter_block);
+            encrypt_iv(&(encObj->inputIV), &(encObj->encryptedIV));
 
             // XOR plaintext with the encrypted counter block
             __m128i input_block = _mm_loadu_si128(reinterpret_cast<__m128i*>(plaintext + i));
@@ -412,8 +414,11 @@ class AES256GCM_bugOpt{
         // Decrypt ciphertext blocks
         for (size_t i = 0; i < ciphertext_len; i += 16) {
             __m128i encrypted_counter_block;
-            inc32_minimal(counter_block_dec);
-            encrypt_iv(counter_block_dec, &encrypted_counter_block); 
+            // inc32_minimal(counter_block_dec);
+            inc32_minimal(&(decObj->inputIV));
+            // encrypt_iv(counter_block_dec, &encrypted_counter_block); 
+            encrypt_iv(&(decObj->inputIV), &(decObj->encryptedIV));
+
 
             // XOR ciphertext with the encrypted counter block to obtain the plaintext
             __m128i ciphertext_block = _mm_loadu_si128(reinterpret_cast<__m128i*>(ciphertext + i));
