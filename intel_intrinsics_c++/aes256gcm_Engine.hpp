@@ -301,11 +301,13 @@ class AES256GCM_bugOpt{
 
     // Expand the IV to a 128-bit block
     __m128i *counter_block_enc, *counter_block_dec;
-    AesGcmObj *encObj, *decObj;
+    __m128i *encrypted_counter_block_enc, *encrypted_counter_block_dec;
 
     AES256GCM_bugOpt(){
         this->counter_block_enc = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
         this->counter_block_dec = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
+        this->encrypted_counter_block_enc = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
+        this->encrypted_counter_block_dec = (__m128i*)_mm_malloc(sizeof(__m128i), 16);
     }
     ~AES256GCM_bugOpt(){
         // Free the allocated memory
@@ -323,14 +325,12 @@ class AES256GCM_bugOpt{
     }
 
     void encrypt_aes256gcm_init(const uint8_t* key_encryption,  uint8_t* iv_encryption){
-        encObj = new AesGcmObj();
-        load_iv_96(&(encObj->inputIV), iv_encryption);
-        load_key_256_encrypt(&(*encObj->key_schedule), key_encryption);
+        load_iv_96(counter_block_enc, iv_encryption);
+        load_key_256_encrypt(key_schedule, key_encryption);
     }
     void decrypt_aes256gcm_init(const uint8_t* key_decryption,  uint8_t* iv_decryption){
-        decObj = new AesGcmObj();
-        load_iv_96(&(decObj->inputIV), iv_decryption);
-        load_key_256_encrypt(&(*decObj->key_schedule), key_decryption);
+        load_iv_96(counter_block_dec, iv_decryption);
+        load_key_256_encrypt(key_schedule, key_decryption);
     }
 
     [[nodiscard]] static __m128i aes_expand_key_evn_step(__m128i key0, __m128i key1) noexcept
@@ -350,6 +350,7 @@ class AES256GCM_bugOpt{
     }    
     void load_key_256_encrypt(__m128i* key_schedule, const uint8_t key[32]) noexcept
 	{
+        //if(key_schedule) return; //execute key_schedule generation only once
 		key_schedule[0] = _mm_loadu_si128(&reinterpret_cast<const __m128i*>(key)[0]);
 		key_schedule[1] = _mm_loadu_si128(&reinterpret_cast<const __m128i*>(key)[1]);
 		key_schedule[2] = aes_expand_key_evn_step(key_schedule[0], _mm_aeskeygenassist_si128(key_schedule[1], 0x01));
@@ -366,6 +367,8 @@ class AES256GCM_bugOpt{
 		key_schedule[13] = aes_expand_key_odd_step(key_schedule[12], key_schedule[11]);
 		key_schedule[14] = aes_expand_key_evn_step(key_schedule[12], _mm_aeskeygenassist_si128(key_schedule[13], 0x40));
 	}
+
+    // Not used as aes-gcm uses only encryption for iv. this is for backtesting purposes
     void load_key_256_decrypt(__m128i* key_schedule, const uint8_t key[32]) noexcept
 	{
 
@@ -399,31 +402,23 @@ class AES256GCM_bugOpt{
         // Encrypt plaintext blocks
         for (size_t i = 0; i < plaintext_len; i += 16) {
             __m128i encrypted_counter_block;
-            // inc32_minimal(counter_block_enc);
-            inc32_minimal(&(encObj->inputIV));
-            // encrypt_iv(counter_block_enc, &encrypted_counter_block);
-            encrypt_iv(&(encObj->inputIV), &(encObj->encryptedIV));
+            inc32_minimal(counter_block_enc);
+            encrypt_iv(counter_block_enc, encrypted_counter_block_enc);
+            //encrypt_iv(&(encObj->inputIV), &(encObj->encryptedIV));
 
             // XOR plaintext with the encrypted counter block
-            __m128i input_block = _mm_loadu_si128(reinterpret_cast<__m128i*>(plaintext + i));
-            __m128i ciphertext_block = _mm_xor_si128(input_block, encrypted_counter_block);
-            _mm_storeu_si128((__m128i*)(ciphertext + i), ciphertext_block);
+            _mm_storeu_si128((__m128i*)(ciphertext + i), _mm_xor_si128(_mm_loadu_si128(reinterpret_cast<__m128i*>(plaintext + i)), *encrypted_counter_block_enc));
         }
     }
     void aes_gcm_decrypt(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
         // Decrypt ciphertext blocks
         for (size_t i = 0; i < ciphertext_len; i += 16) {
             __m128i encrypted_counter_block;
-            // inc32_minimal(counter_block_dec);
-            inc32_minimal(&(decObj->inputIV));
-            // encrypt_iv(counter_block_dec, &encrypted_counter_block); 
-            encrypt_iv(&(decObj->inputIV), &(decObj->encryptedIV));
-
+            inc32_minimal(counter_block_dec);
+            encrypt_iv(counter_block_dec, encrypted_counter_block_dec); 
 
             // XOR ciphertext with the encrypted counter block to obtain the plaintext
-            __m128i ciphertext_block = _mm_loadu_si128(reinterpret_cast<__m128i*>(ciphertext + i));
-            __m128i plaintext_block = _mm_xor_si128(ciphertext_block, encrypted_counter_block);
-            _mm_storeu_si128((__m128i*)(plaintext + i), plaintext_block);
+            _mm_storeu_si128((__m128i*)(plaintext + i), _mm_xor_si128(_mm_loadu_si128(reinterpret_cast<__m128i*>(ciphertext + i)), *encrypted_counter_block_dec));
         }
     }
 
