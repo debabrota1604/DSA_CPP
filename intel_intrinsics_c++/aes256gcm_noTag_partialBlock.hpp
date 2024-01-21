@@ -38,36 +38,22 @@ class aes256Engine{
 	}
 };
 
-class aes256gcm_EncryptContext{
+class AesGcmObj{
     public:
     __m128i inputIV;
     __m128i encryptedIV;
     size_t encIV_unusedLen;
     __m128i key_schedule[15];
 
-    aes256gcm_EncryptContext(){
+    AesGcmObj(){
         encIV_unusedLen =0;
     }
 };
-
-class aes256gcm_DecryptContext{
-    public:
-    __m128i inputIV;
-    __m128i encryptedIV;
-    size_t encIV_unusedLen;
-    __m128i key_schedule[15];
-
-    aes256gcm_DecryptContext(){
-        encIV_unusedLen =0;
-    }
-};
-
 
 
 class AES256GCM_NoTag_partialBlockFix{  
     aes256Engine *aesEngine;
-    aes256gcm_EncryptContext *encObj;
-    aes256gcm_DecryptContext *decObj;
+    AesGcmObj *encObj, *decObj;
 
 
     [[nodiscard]] static __m128i aes_expand_key_evn_step(__m128i key0, __m128i key1) noexcept
@@ -129,12 +115,12 @@ class AES256GCM_NoTag_partialBlockFix{
     ~AES256GCM_NoTag_partialBlockFix(){
     }
     void encrypt_aes256gcm_init(const uint8_t* key_encryption,  uint8_t* iv_encryption){
-        encObj = new aes256gcm_EncryptContext();
+        encObj = new AesGcmObj();
         load_iv96(encObj->inputIV, iv_encryption);
         load_key_256(&(*encObj->key_schedule), key_encryption);
     }
     void decrypt_aes256gcm_init(const uint8_t* key_decryption,  uint8_t* iv_decryption){
-        decObj = new aes256gcm_DecryptContext();
+        decObj = new AesGcmObj();
         load_iv96(decObj->inputIV, iv_decryption);
         load_key_256(&(*decObj->key_schedule), key_decryption);
     }
@@ -166,13 +152,11 @@ class AES256GCM_NoTag_partialBlockFix{
         }
     }
 
-    void aes_gcm_encrypt_partialBlockFix(uint8_t* plaintext, size_t plaintext_len, uint8_t* ciphertext) {
+    void aes_gcm_encrypt_partialBlockFix_single(uint8_t* plaintext, size_t plaintext_len, uint8_t* ciphertext) {
         const size_t precompute_xor_len = std::min(encObj->encIV_unusedLen, plaintext_len);
         const uint8_t* buffer = reinterpret_cast<const uint8_t*>(&encObj->encryptedIV);
-        //print_aes_block_singleLine("Last encrypted_iv", encObj->encryptedIV);
         size_t iter=0, lastUsedLen = 16- encObj->encIV_unusedLen;
         while(iter < precompute_xor_len){
-           //std::cout << "XOR index: " << std::dec << (lastUsedLen +iter) %16 << std::endl;
             ciphertext[iter] = plaintext[iter] ^ buffer[(lastUsedLen +iter) %16];
             iter++;
         }
@@ -192,7 +176,7 @@ class AES256GCM_NoTag_partialBlockFix{
         }
     }
     
-    void aes_gcm_decrypt_partialBlockFix(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
+    void aes_gcm_decrypt_partialBlockFix_single(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
         const size_t precompute_xor_len = std::min(decObj->encIV_unusedLen, ciphertext_len);
         const uint8_t* buffer = reinterpret_cast<const uint8_t*>(&decObj->encryptedIV);
         size_t iter=0, lastUsedLen = 16- decObj->encIV_unusedLen;
@@ -215,6 +199,41 @@ class AES256GCM_NoTag_partialBlockFix{
         }
 
     }
+
+    void aes_gcm_process_blocks(const uint8_t* input, size_t len, uint8_t* output, AesGcmObj* obj) {
+        size_t precompute_xor_len = std::min(obj->encIV_unusedLen, len);
+        const uint8_t* buffer = reinterpret_cast<const uint8_t*>(&obj->encryptedIV);
+        size_t iter = 0, lastUsedLen = 16 - obj->encIV_unusedLen;
+
+        //XOR initial bytes with precomputed values
+        std::transform(input, input + precompute_xor_len, buffer + lastUsedLen,
+                    output, [](uint8_t a, uint8_t b) { return a ^ b; });
+
+        // Update unused length
+        obj->encIV_unusedLen = (16 + precompute_xor_len - len) % 16;
+
+        // Process remaining blocks
+        for (size_t i = precompute_xor_len; i < len; i += 16) {
+            inc32(obj->inputIV);
+
+            // Encrypt counter block
+            aesEngine->encrypt(&obj->inputIV, &obj->encryptedIV, obj->key_schedule);
+
+            // Process input and store output
+            __m128i input_block = _mm_loadu_si128(reinterpret_cast<const __m128i*>(input + i));
+            __m128i result_block = _mm_aesenc_si128(input_block, obj->encryptedIV);
+            _mm_storeu_si128(reinterpret_cast<__m128i*>(output + i), result_block);
+        }
+    }
+
+    void aes_gcm_encrypt_partialBlockFix(uint8_t* plaintext, size_t plaintext_len, uint8_t* ciphertext) {
+        aes_gcm_process_blocks(plaintext, plaintext_len, ciphertext, encObj);
+    }
+
+    void aes_gcm_decrypt_partialBlockFix(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
+        aes_gcm_process_blocks(ciphertext, ciphertext_len, plaintext, decObj);
+    }
+
 
 
 

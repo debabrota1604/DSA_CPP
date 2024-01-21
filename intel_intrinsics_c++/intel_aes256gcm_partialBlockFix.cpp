@@ -30,8 +30,9 @@ int main() {
     iv = r.getRandomUint8(AES_IV_SIZE); //32 char key, 12 char iv 
 
 	//initialize intel aes-256-gcm class object with key and iv
-    AES256GCM_bugOpt aesObj;
-    aesObj.initialize(key, iv);
+    AES256GCM_NoTag_partialBlockFix aesObj;
+    aesObj.encrypt_aes256gcm_init(key, iv);
+    aesObj.decrypt_aes256gcm_init(key, iv);
 
 
 	cout << "======================================================== Using INTEL AES256-GCM with Plaintext Size: " << AES_INPUT_SIZE << endl;
@@ -46,11 +47,11 @@ int main() {
         plain = r.getRandomStringUnsigned(AES_INPUT_SIZE);
 
 		CpuProfiler::getUniqueInstance().startTag("EncryptTime");
-		aesObj.aes_gcm_encrypt(plain, AES_INPUT_SIZE, computed_cipher);
+		aesObj.aes_gcm_encrypt_partialBlockFix(plain, AES_INPUT_SIZE, computed_cipher);
 		CpuProfiler::getUniqueInstance().stopTag("EncryptTime");
 
 		CpuProfiler::getUniqueInstance().startTag("DecryptTime");
-		aesObj.aes_gcm_decrypt(computed_cipher, AES_INPUT_SIZE, computed_plain);
+		aesObj.aes_gcm_decrypt_partialBlockFix(computed_cipher, AES_INPUT_SIZE, computed_plain);
 		CpuProfiler::getUniqueInstance().stopTag("DecryptTime");
 
 		

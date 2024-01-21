@@ -75,11 +75,11 @@ int main() {
         else plain = r.getRandomStringUnsigned(AES_INPUT_SIZE);
 
 		CpuProfiler::getUniqueInstance().startTag("EncryptTime");
-		aesObj.aes_gcm_encrypt_partialBlockFix(plain, AES_INPUT_SIZE, computed_cipher);
+		aesObj.aes_gcm_encrypt(plain, AES_INPUT_SIZE, computed_cipher);
 		CpuProfiler::getUniqueInstance().stopTag("EncryptTime");
 
 		CpuProfiler::getUniqueInstance().startTag("DecryptTime");
-		aesObj.aes_gcm_decrypt_partialBlockFix(computed_cipher, AES_INPUT_SIZE, computed_plain);
+		aesObj.aes_gcm_decrypt(computed_cipher, AES_INPUT_SIZE, computed_plain);
 		CpuProfiler::getUniqueInstance().stopTag("DecryptTime");
 
 		if(PRINT_ALL_DATA){
