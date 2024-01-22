@@ -303,6 +303,11 @@ class AES256GCM_bugOpt{
     __m128i counter_block_enc, counter_block_dec;
     __m128i encrypted_counter_block_enc, encrypted_counter_block_dec;
 
+
+    // Stores remaining encrypted iv bytes left for future plaintexts
+    size_t encIV_unusedLen, encIV_unusedLen_dec;
+
+
     AES256GCM_bugOpt(){
     }
     ~AES256GCM_bugOpt(){
@@ -316,10 +321,12 @@ class AES256GCM_bugOpt{
     void encrypt_aes256gcm_init(const uint8_t* key_encryption,  uint8_t* iv_encryption){
         load_iv_96(&counter_block_enc, iv_encryption);
         load_key_256_encrypt(key_schedule, key_encryption);
+        encIV_unusedLen =0;
     }
     void decrypt_aes256gcm_init(const uint8_t* key_decryption,  uint8_t* iv_decryption){
         load_iv_96(&counter_block_dec, iv_decryption);
         load_key_256_encrypt(key_schedule, key_decryption);
+        encIV_unusedLen_dec=0;
     }
 
     [[nodiscard]] static __m128i aes_expand_key_evn_step(__m128i key0, __m128i key1) noexcept
@@ -360,7 +367,6 @@ class AES256GCM_bugOpt{
     // Not used as aes-gcm uses only encryption for iv. this is for backtesting purposes
     void load_key_256_decrypt(__m128i* key_schedule, const uint8_t key[32]) noexcept
 	{
-
 		this->key_schedule_decrypt[14] = key_schedule[0];
 		this->key_schedule_decrypt[13] = _mm_aesimc_si128(key_schedule[1]);
 		this->key_schedule_decrypt[12] = _mm_aesimc_si128(key_schedule[2]);
@@ -387,7 +393,16 @@ class AES256GCM_bugOpt{
         *storage = _mm_insert_epi8(*storage, 0x01, 15);
     }
 
-    void aes_gcm_encrypt(uint8_t* plaintext, size_t plaintext_len, uint8_t* ciphertext) {
+    // Load 128bit IV to a 128-bit block
+    __inline__ void load_iv128(__m128i* storage, uint8_t* iv_128b) { //reduces intermediate variable
+        // Load the original 96-bit IV directly into the first 128-bit block, avoiding an extra register and store operation
+        _mm_storeu_si128(storage, _mm_loadu_si128((__m128i*)iv_128b));
+
+        // Combine zeroing and setting the last byte in a single instruction, then bitwise-OR
+        *storage = _mm_insert_epi8(*storage, 0x01, 15);
+    }
+
+    void aes_gcm_encrypt_old(uint8_t* plaintext, size_t plaintext_len, uint8_t* ciphertext) {
         // Encrypt plaintext blocks
         for (size_t i = 0; i < plaintext_len; i += 16) {
             inc32_minimal(counter_block_enc);
@@ -398,7 +413,7 @@ class AES256GCM_bugOpt{
             _mm_storeu_si128((__m128i*)(ciphertext + i), _mm_xor_si128(_mm_loadu_si128(reinterpret_cast<__m128i*>(plaintext + i)), encrypted_counter_block_enc));
         }
     }
-    void aes_gcm_decrypt(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
+    void aes_gcm_decrypt_old(uint8_t* ciphertext, size_t ciphertext_len, uint8_t* plaintext) {
         // Decrypt ciphertext blocks
         for (size_t i = 0; i < ciphertext_len; i += 16) {
             inc32_minimal(counter_block_dec);
@@ -423,4 +438,50 @@ class AES256GCM_bugOpt{
         }
 		*ciphertext = _mm_aesenclast_si128(*ciphertext, key_schedule[14]);
 	}
+
+    void aes_gcm_encrypt(const uint8_t* input, size_t len, uint8_t* output) {
+        const size_t precompute_xor_len = std::min(encIV_unusedLen, len);
+        const uint8_t* buffer = reinterpret_cast<const uint8_t*>(&encrypted_counter_block_enc);
+
+        //XOR initial bytes with precomputed values
+        std::transform(input, input + precompute_xor_len, buffer + (16 - encIV_unusedLen),
+                    output, [](uint8_t a, uint8_t b) { return a ^ b; });
+
+        // Update unused length
+        encIV_unusedLen = (16 + precompute_xor_len - len) % 16;
+
+        // Process remaining blocks
+        for (size_t i = precompute_xor_len; i < len; i += 16) {
+            inc32_minimal(counter_block_enc);
+
+            // Encrypt counter block
+            encrypt_iv(&counter_block_enc, &encrypted_counter_block_enc); 
+
+            // Process input and store output
+            _mm_storeu_si128(reinterpret_cast<__m128i*>(output + i), _mm_aesenc_si128(_mm_loadu_si128(reinterpret_cast<const __m128i*>(input + i)), encrypted_counter_block_enc));
+        }
+    }
+    
+    void aes_gcm_decrypt(const uint8_t* input, size_t len, uint8_t* output) {
+        const size_t precompute_xor_len = std::min(encIV_unusedLen_dec, len);
+        const uint8_t* buffer = reinterpret_cast<const uint8_t*>(&encrypted_counter_block_dec);
+
+        //XOR initial bytes with precomputed values
+        std::transform(input, input + precompute_xor_len, buffer + (16 - encIV_unusedLen_dec),
+                    output, [](uint8_t a, uint8_t b) { return a ^ b; });
+
+        // Update unused length
+        encIV_unusedLen_dec = (16 + precompute_xor_len - len) % 16;
+
+        // Process remaining blocks
+        for (size_t i = precompute_xor_len; i < len; i += 16) {
+            inc32_minimal(counter_block_dec);
+
+            // Encrypt counter block
+            encrypt_iv(&counter_block_dec, &encrypted_counter_block_dec); 
+
+            // Process input and store output
+            _mm_storeu_si128(reinterpret_cast<__m128i*>(output + i), _mm_aesenc_si128(_mm_loadu_si128(reinterpret_cast<const __m128i*>(input + i)), encrypted_counter_block_dec));
+        }
+    }
 };
