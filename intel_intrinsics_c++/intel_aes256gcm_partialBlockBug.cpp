@@ -1,4 +1,5 @@
 #include "aes256gcm_Engine.hpp"
+#include "aes256gcm_Engine2.hpp"
 #include <cstdint>
 #include <string.h>     //for memcmp
 
@@ -8,10 +9,13 @@
 using namespace std;
 
 // Change these constants for AES-256
+#define MATCH_MODE true
+#define PRINT_ALL_DATA true
+#define PRINT_IV true
 const int AES_KEY_SIZE = 32;  // 256 bits
 const int AES_IV_SIZE = 12;  // 96 bits
 const int AES_BLOCK_SIZE = 16;  // 128 bits
-const int AES_INPUT_SIZE = 300;
+const int AES_INPUT_SIZE = 32;
 
 int main() {
     RandomNumC r;
@@ -25,13 +29,14 @@ int main() {
     CpuProfiler::getUniqueInstance().addTag("EncryptTime");
     CpuProfiler::getUniqueInstance().addTag("DecryptTime");
 
-	// initialize key and iv
-    key = r.getRandomUint8(AES_KEY_SIZE);
-    iv = r.getRandomUint8(AES_IV_SIZE); //32 char key, 12 char iv 
-
-	//initialize intel aes-256-gcm class object with key and iv
-    AES256GCM_bugOpt aesObj;
-    aesObj.initialize(key, iv);
+	// initialize key and iv    
+    #ifdef MATCH_MODE
+        key = r.hexStringToByteArray("49 74 6b 75 79 53 72 5d 51 78 49 6a 5f 79 53 63 6b 74 6a 4e 6f 79 5d 4e 4c 79 5a 4f 58 65 51 70", AES_KEY_SIZE);
+        iv  = r.hexStringToByteArray("78 5b 54 60 4e 66 72 58 4d 74 62 4c", AES_IV_SIZE);
+    #else
+        key = r.getRandomUint8(AES_KEY_SIZE);
+        iv = r.getRandomUint8(AES_IV_SIZE); //32 char key, 12 char iv 
+    #endif
 
 
 	cout << "======================================================== Using INTEL AES256-GCM with Plaintext Size: " << AES_INPUT_SIZE << endl;
@@ -41,9 +46,24 @@ int main() {
 	r.print_uint8_Array_hex(iv, AES_IV_SIZE);
 	cout << "====================================== Looping for " << MAX_OP << " times ======================================" << endl;
 
+
+	//initialize intel aes-256-gcm class object with key and iv
+    AES256GCM_bugOpt aesObj;
+    // AES256_GCM_NoTag aesObj;
+    aesObj.initialize(key, iv);
+
 	// Actual Simulation starts below
 	for( int iter=0; iter< MAX_OP; iter++){
-        plain = r.getRandomStringUnsigned(AES_INPUT_SIZE);
+        #ifdef MATCH_MODE
+		//plain = r.hexStringToByteArray("50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00", AES_INPUT_SIZE);
+		//plain = r.hexStringToByteArray("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00", AES_INPUT_SIZE);
+		//plain = r.hexStringToByteArray("50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52", AES_INPUT_SIZE);
+		//plain = r.hexStringToByteArray("50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00", AES_INPUT_SIZE);
+		//plain = r.hexStringToByteArray("50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 00 50 62 53 52 64 51 5b 6d 71 63 78 77 5e 7a 51 ", AES_INPUT_SIZE);
+		plain = r.hexStringToByteArray("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00", AES_INPUT_SIZE);
+        #else 
+		plain = r.getRandomStringUnsigned(AES_INPUT_SIZE);
+		#endif
 
 		CpuProfiler::getUniqueInstance().startTag("EncryptTime");
 		aesObj.aes_gcm_encrypt(plain, AES_INPUT_SIZE, computed_cipher);
@@ -53,9 +73,36 @@ int main() {
 		aesObj.aes_gcm_decrypt(computed_cipher, AES_INPUT_SIZE, computed_plain);
 		CpuProfiler::getUniqueInstance().stopTag("DecryptTime");
 
+        #ifdef PRINT_ALL_DATA
+			//cout << "PT: ";
+			//r.print_uint8_Array_hex(plain, AES_INPUT_SIZE);
+			cout << "CT "<< std::dec << iter << "\t" ;
+			r.print_uint8_Array_hex(computed_cipher, AES_INPUT_SIZE);
+			//cout << "PT':";
+			//r.print_uint8_Array_hex(computed_plain, AES_INPUT_SIZE);
+		#endif
+
+        #ifdef PRINT_IV
+			string title = "Final IV at iter " + to_string(iter) + "\t" ;
+			//aesObj.print_aes_block_singleLine(title, *aesObj.counter_block_enc);
+		#endif
 		
 	}
     CpuProfiler::getUniqueInstance().prepareReportAndDumpToFile();
+
+    #ifdef MATCH_MODE //prints only last output
+        cout << "Printing the last PT, CT and decrypted CT (PT'):\n";
+		cout << "PT: \t";
+		r.print_uint8_Array_hex(plain, AES_INPUT_SIZE);
+		cout << "CT: \t";
+		r.print_uint8_Array_hex(computed_cipher, AES_INPUT_SIZE);
+		cout << "PT':\t";
+		r.print_uint8_Array_hex(computed_plain, AES_INPUT_SIZE);
+
+        if (0 == memcmp(plain, computed_plain, sizeof(AES_INPUT_SIZE)))
+            std::cout << "Plaintext matched \U0001F604\n"; // Unicode for :) smiley
+        else std::cout << "Plaintext mismatch \U0001F61E\n"; // Unicode for :( sad face
+	#endif
 
     return 0;
 }
