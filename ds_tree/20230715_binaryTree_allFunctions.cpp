@@ -137,18 +137,25 @@ class Tree{
         }
     }
 
+    // height of a leaf is zero.
     int height(Node *root){
         if(!root) return 0;
         return max(height(root->l), height(root->r)) +1;
     }
 
+    /*
+    The diameter of a tree T is the largest of the following quantities: 
+        The diameter of T’s left subtree.
+        The diameter of T’s right subtree.
+        The longest path between leaves that goes through the root of T (this can be computed from the heights of the subtrees of T)
+    */
     int diameter(Node *root){
         if(!root) return 0;
         return max(diameter(root->l), max(diameter(root->r), height(root->l) + height(root->r) +1));
     }
 
     // This function reduces the extra O(n) call to height by passing the height value internally. 
-    // Otherwise each node would call height function and total completexity would reach O(n^2).
+    // Otherwise each node would call height function and total complexity would reach O(n^2).
     pair<int,int> fastDiameter(Node *root){
         if(!root) return make_pair(0,0);
 

@@ -1,7 +1,0 @@
-To enable the debug prints, use the following command to compile the code:
-
-g++ debugPrint.cpp -D debugEnable
-
-Otherwise,
-
-g++ debugPrint.cpp

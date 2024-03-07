@@ -1,2 +1,0 @@
-5655
-InitTime256::  Mean: 5655 Median: 5655 90th: 5655 95th: 5655 99th: 5655 99.9th: 5655 Min: 5655 Max: 5655 Count: 1
