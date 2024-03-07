@@ -30,6 +30,7 @@ void insertNode(Node **phead, int data, int pos){
     pos = 0 : insert at begin : Handled differently
     pos = -1 : insert at end : compute length and perform insert-at-any-position case
     */
+   if(*phead == nullptr) return insertNode(phead, data, 0);
     if(pos == 0){
         Node *temp = new Node(data);
         temp->ptr = *phead;
