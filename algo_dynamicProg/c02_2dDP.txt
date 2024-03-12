@@ -1,0 +1,39 @@
+
+Rules for writing the recursive function:
+    1. Deduce the base condition: 
+        Use the smallest valid input to decide how it will be handled. 
+        Do not use the recursion to get to the invalid input for that base case.
+    2. Recurse on sub-problems:
+        Use the choice diagram to deduce the recurrence relation.
+        A choice diagram is a diagram where we decide how many choices we have to process an input.
+    3. Return the answer constructed from the subproblems.
+
+===================================================
+
+Knapsack Problem: Given a set of item weights, item values and knapsack capacity, pick the items into the knapsack such that the value is maximized.
+
+knapsack problem is a pattern that can be seen in other patterns like this:
+    1. Subset sum
+    2. Equal Sum
+    3. Count of subset sum
+    4. Minimum subset sum difference
+    5. Target Sum
+    6. #subsets with given difference
+
+
+Knapsack problem is of three types:
+    1. fractional Knapsack
+    2. 0-1 knapsack
+    3. unbounded knapsack
+
+Fractional Knapsack: You can take the items in fractions.
+    Greedy Approach: 
+        Step 1: Calculate the per unit value for each item. 
+        Step 2: Then pick each item based on the descending order of values.
+
+0-1 Approach: You must pick the items as a whole.
+    Dynamic Programming Approach:
+        Step 1: Create a 2-d array to store the intermediate values.
+
+Unbounded Approach: You can pick each items as many times as you want.
+
