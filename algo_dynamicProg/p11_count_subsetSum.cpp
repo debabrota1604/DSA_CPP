@@ -5,6 +5,8 @@ using namespace std;
 #define MP make_pair 
 unordered_map<PR, int> dp;
 
+// Count number of subsets with  given sums
+
 int countSubsetSum(vector<int> nums,int sum, int lo){
     if(lo==nums.size())
         if(sum==0) return 1; //add 1 to the number of solutions found
@@ -22,7 +24,9 @@ int countSubsetSum(vector<int> nums,int sum, int lo){
 
 int main(){
     vector<int> ip {3, 3, 3, 3}, ip2 {5,5,10};
-    cout << countSubsetSum(ip,6,0) << endl; dp.clear();
+    cout << countSubsetSum(ip,6,0) << endl; 
+    
+    dp.clear();
     cout << countSubsetSum(ip2,10,0) << endl;
 
 }

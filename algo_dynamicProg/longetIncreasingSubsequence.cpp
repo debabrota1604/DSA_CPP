@@ -19,10 +19,12 @@ int las(int endIndex){
 int main(){
     cout << "Given an integer sequence, this program computes the longest subsequence which is in ascending order.\nInput sequence length: "; cin >> seqLen;
     cout << "Enter the sequence (space seperated): ";
-    seq = new int[seqLen]; for(int i=0;i<seqLen; i++){ cin >> seq[i]; }
+    seq = new int[seqLen]; 
+    for(int i=0;i<seqLen; i++){ cin >> seq[i]; }
     for(auto i=0; i<seqLen; i++){ cout << seq[i] << " "; }
     
-    
+    //Use kedene's algo
+
     cout << "Max Length is: " << las(seqLen-1) <<endl;
 
 
