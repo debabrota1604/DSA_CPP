@@ -15,8 +15,6 @@ deQueue(q):
     Here time complexity will be O(1)
 */
 
-// CPP program to implement Queue using
-// two stacks with costly enQueue()
 #include <bits/stdc++.h>
 using namespace std;
 

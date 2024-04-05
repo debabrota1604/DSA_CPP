@@ -24,7 +24,7 @@ void disp(Node *head){
     cout << endl;
 }
 
-void insertNode(Node **phead, int data, int pos){
+void insertNode(Node **phead, int data, int pos){//double pointer for head to reflect any changes done to the head node
     /*
     Two special cases:
     pos = 0 : insert at begin : Handled differently
@@ -61,7 +61,7 @@ void insertNode(Node **phead, int data, int pos){
     }   
 }
 
-void deleteNode(Node **head, int index){
+void deleteNode(Node **head, int index){//double pointer for head to reflect any changes done to the head node
     if(*head == nullptr){
         cout << "Error: List is already empty!" << endl;
         return;
