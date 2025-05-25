@@ -21,6 +21,8 @@ Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","
 Output: 0
 Explanation: The endWord "cog" is not in wordList, therefore there is no valid transformation sequence.
 */
+#include <bits/stdc++.h>
+using namespace std;
 
 class Solution {
 private:

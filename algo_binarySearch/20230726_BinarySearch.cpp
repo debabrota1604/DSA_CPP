@@ -8,7 +8,6 @@ int binarySearch(vector<int> inp, int key){
     hi = inp.size()-1;
     while(lo<=hi){
         mid = lo + (hi-lo)/2;
-        //cout << lo << " " << hi <<  " " << mid << endl;
 
         if(key < inp[mid]) hi = mid -1;
         else if(key >inp[mid]) lo = mid+1;
@@ -32,7 +31,7 @@ int firstOccurence(vector<int> inp, int key){
     while(lo <= hi){
         mid = lo + (hi-lo)/2;
         if(key == inp[mid]){
-            res = mid;
+            res = mid;  // Store the current index
             hi = mid-1; // Search again for the previous key in the array
         }
         else if(key < inp[mid]) hi = mid -1;
@@ -45,7 +44,7 @@ int lastOccurence(vector<int> inp, int key){
     while(lo <= hi){
         mid = lo + (hi-lo)/2;
         if(key == inp[mid]){
-            res = mid;
+            res = mid;  // Store the current index
             lo = mid+1; //Search again for the next key in the array
         }
         else if(key < inp[mid]) hi = mid -1;
@@ -89,8 +88,6 @@ int main(){
     int key2 = 0;
     cout << "First Occurence for " << key2 << ": " << firstOccurence(firstLast, key2) << endl;
     cout << "Last Occurence for " << key2 << ": " << lastOccurence(firstLast, key2) << endl;
-
-
 
     return 0;
 }

@@ -30,12 +30,10 @@ int getPeak(vector<int> arr){
     return -1;
 }
 
-
 int main(){
     vector<int> vec { 0,1,2,0};
     vector<int> vec2 { 0,1,2,3,4,3,2,1,0,-1};
     cout << "Peak in Mountain array: " << getPeak(vec2) << endl;
-
 
     return 0;
 }
